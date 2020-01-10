@@ -1,3 +1,4 @@
+
 /* CO TO JEST OPERATOR */
 // Konstrukcja języka programowania, która wykonuje jakąś operację na wartościach (argumentach/operandach) i zwraca wartość.
 // Operand - wartość/wartości wykorzystywane przez operator 
