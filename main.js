@@ -5,7 +5,6 @@
 // operator może wymagać podania określonych typów wartości lub zachowywać się w różny sposób przy różnych typach np. operator dodawania przy dwóch typach number dodaje, przy typie string łączy (konkatenacja).
 
 
-fff
 // Pamiętajmy o tym, że dochodzi tutaj do niejawnej, autamatycznej konwersji typów (typowanie słabe). W wielu językach programowania (typowanie silne) taka konwersja nie jest możliwa
 2 + 2; //zwraca 4 (typ number)
 "2" + "2"; //zwraca "22" (typ string)
