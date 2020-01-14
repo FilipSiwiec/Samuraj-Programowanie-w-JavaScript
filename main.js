@@ -1,4 +1,4 @@
-onst txt = 'jakiś tekst nowy1';
+const txt = 'jakiś tekst nowy1';
 let score = 12.55;
 //te dwie zmienne przydadzą nam się w dalszych przykładach w pliku
 
