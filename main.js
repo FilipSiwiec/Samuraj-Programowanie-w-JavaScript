@@ -1,50 +1,149 @@
-const txt = 'jakiś tekst nowy1';
-let score = 12.55;
-//te dwie zmienne przydadzą nam się w dalszych przykładach w pliku
+//  za pomocą literału, po prostu liczba utworzy wartość typu prostego
 
-"zbiór znaków w cudzysłowie"; 1222; true; null; undefined;
-// Każdy typ prosty (poza Symbol) można stworzyć za pomocą literału. Literał to zestaw znaków, które zostaną rozpoznane przez interpreter
+const integerExample = 100;
+const decimalExample = 100.212;
+typeof integerExample; //number w JS, w innych językach często integer dla liczb całkowitych 
+typeof decimalExample; //number w JS, w innych językach często float czy decimal
 
-//literał łancucha, literał liczby ... 
-// na przyszłość: literał obiektu "{}", literał tablicy "[]"
+// JS akceptuje różne systemy liczbowe (poza dziesętnym)
+// Reprezentacja szesznastkowa (prefiks 0x)
+const hexNumber = 0xff; //znamy z css czyli ff to 255 w systemie dziesiętnym
 
-/* Typy proste nie są obiektami, to jednak mozemy na nich (number, string, boolean) wykonywać metody i właściwości, które to są domeną obiektów */
+// Mamy system ósemkowy czy binarny. System binarny to prefiks 0b
+// console.log(0b011101)
+
+// notacja naukowa (e)
+console.log(5e2)
+//5 i 10 do potęgi drugiej
+
+// Przykładowe metody, które możemy wykonać na liczbie
+const newNumber = 123.45;
+
+// METODA .toFixed(), czyli zaokrągelnie
+// zaokrąglenie do liczby całkowitej (od 5 zaokrągla wzwyż, poniżej 5 w dół)
+newNumber.toFixed();
+// zaokrąglenie do jednego miejsca po przecinku
+newNumber.toFixed(1);
+// problem jeśli pracuejmy bezpośrednio na liczbie
+// 123.toFixed(0);
+123..toFixed(0);
+
+// Ważne: po zaokrągleniu metoda toFixed zwraca wartość, która jest stringiem
+
+// METODA .toString() - jawna zamiana typów z number na string z możliwością zamiany systemu liczbowego
+newNumber.toString(); //na system dziesiętny
+newNumber.toString(2); // na system dwójkowy (binarny)
+// 255.toString(16); // żle 
+// 255..toString(16);  //dobrze
+// na system szesnastkowy
+
+//METOD .toExponential() - jawna zamiana na notację naukową (też jako string)
+newNumber.toExponential()
+//przy okazji pierwszeństwo działań warto zobaczyć
+// typeof newNumber.toExponential()
+// newNumber.toExponential() == newNumber.toExponential()
+
+// FUNKCJE, które pozwalają zrobić rózne zadania z liczbami
+
+// sprawdzenie czy jest liczbą całkowitą
+Number.isInteger(decimalExample) //false, bo 100.212 (wcześniej zadeklarowaliśmy i zainiclalizowaliśmy tą zmieną)
+Number.isInteger(100.1) //false
+Number.isInteger(integerExample) //true
+Number.isInteger(28001) //true
+
+const integerExample2 = 100.00
+Number.isInteger(integerExample2) //true, nawet jak jest ułamek dzieisętny ale tylko w zapisie
+
+// Sprawdzenie czy dana liczba jest skończona (prawidłowa)
+Number.isFinite(2); //true
+Number.isFinite(NaN); //false
+Number.isFinite(Infinity); //false
+Number.isFinite(1e400); //false, ponieważ maksymalna liczba to 1e308, najmniejsza liczba -1e308
+Number.isFinite(3e300); //true
+
+//NaN - wartość typu number, ale o nie rozpoznanej wartości (Not a Number). Liczba, która nie jest liczbą. np gdy number mnożymy przez string
+typeof NaN; //number
+
+//Infinity - gdy przekrozymy maksymalne i minimalne wartości i gdy dzielimy przez 0
+typeof Infinity; //number
+
+// Tworzenie obiektu instancji Number
+const numberObj = new Number() //bez podania wartości da 0
+const numberObj2 = new Number("doś") //podanie stringa da NaN, true da 1, a false 0
+const umberObj3 = new Number("222.121") //da liczbę nawet jak podajemy argument jako string
+const umberObj4 = new Number(222.121) //wynik taki sam co wyżej 
+
+// Działania arytmetyczne - przykłady
+// Reszta z działania jest zwraca - modulu
+console.log(20 % 2) //0
+// console.log(20 % 3) //2
+// console.log(20 % 21) //20
+
+// Potęgowanie
+2 ** 8
+2 * 8
+2 / 8
+//Operatory dwuargumentowe (argumenty to operandy)
 
 
-// właściwość - informacje o stanie (wartości)
-// metoda - działania (na wartości), które najczęściej zwraca nową wartość  w oparciu o działanie na wartości.
+//Konwersja niejawna/automatyczna (coercion) liczby w stringa lub stringa w liczbę (przy różnych operatorach)
+// konkatenacja
+20 + "20" //"2020"
+20 * "20" //400
 
-// Właściwości
-txt.length; //właściwość zawierająca informacje o długości stringa
-txt[2]; //pobranie znaku, kótry znajduje się pod danym indeksem
+// Konwersja jawna - inny typ w number
+Number('210'); //210
+Number(true); //1
+Number(""); //0
+Number("cos"); //NaN - jeśli czegoś nie może zamienić w liczbę
 
-// Metody (nie dokonują zmiany, tylko zwracają). Metody muszą być wywołane (()), bez wywołania zobaczymy tylko czym są a nie ich działanie
-// metoda(argument)
+//Wykorzystanie konwersji niejawnej
+// trick - przemnożyć przez jeden bo mnożenie zamienia stringa na number
+"20" * 1
+ // Sztuczka działająca (hack)
+ + "20"
+// Natomiast liczbę na stringa możemy zamienić dodając pusty strong
+20 + ""
 
-txt.toUpperCase; //zwraca funkcje (czyli bez wywowałania kieruje do funkcji (metodą określamy funkcję, która jest przypisana do obiektu - oczywiście będziemy o tym jeszcze rozmawiać)
-txt.toUpperCase(); //wywołanie metody dla string
-score.toFixed(); //wywołanie metody dla number (typy nie mają tych samych metod, tylkjo różne)
-txt.indexOf('ś'); //metoda sprawdzająca czy w danym stringu jest wskazany znak, a jeśli tak to na jakiej pozycji (o jakim indeksie, licząć od zera)
+//Gdy chcemy typ number zamienić na typ string (toString było wyżej, ale przypominam) 
+200..toString();
+String(200);
+// oczywiście najczęsciej konwertujemy odwołujace się do zmiennej, a nie bezpośrednio liczbę
 
-// Metody nie przerabiają startych wartości a zwracają nowe (stare zostają niezmienione) Dlatego te nowe wartości gdzieś powinniśmy przypisać, jeśli chcemy z nich skorzystać w dalszej części programu.
-const newTxt = txt.toUpperCase();
-const fixedNumber = score.toFixed();
+// Również parseInt() pozwala nam zmienić stringa w number. Najpierw podajemy string (w którym jest liczba) a potem możemy powiedzieć w jakim jest systemie. Wynikiem działania funkcji będzie number w zapisie dziesiętnym
+parseInt('20', 10) //20
+parseInt('100', 2) //4
+parseInt('0xff', 16) //255
+// Druga wartość jest niepotrzebna jeśli chcemy uzyskać wartość dziesiętną
+parseInt('100') //100
+parseInt('200') //200
+parseInt('0xff') //255
+parseInt("222abc") //222 bo usunie litery. Działa jeśli liczba występuje jako pierwsza
+parseInt("22.55") //usunie to co po kropce 22
+parseFloat("2.22") // nie usuwa.
 
-// Typy proste nie mają właściwości i metod. Jak to się więc dzieje, że możemy pobrać ich właściwości czy wykonać na nich metody (jak na obiektach)?
-// 1 - tworzymy zmienną i wartość string
-const name = "Janek";
-name.length; //właściwość której nie ma w typie prostym, i teraz zaczyna pracować silnik, który robi sobie mniej więcej coś takiego jak ponizej by pobrać wartość tej właściwości
-// 2- SILNIK TWORZY OBIEKT NA TYM ETAPIE (nazwa zmiennejj tylko dla przykładu)
-//Tworzy obiekt String np. 
-// const nameTemporary = new String(name);
-//nameTemporary.length
-// 3 - Zwraca 5 (bo taką ma długość "Janek") i usuwa obiekt String (w przykłądzie znajduje się w nameTemporary)
+parseInt('200') + parseInt("3"); //najpierw wykonają się metody a potem (na tym etapie będą już typu number) zostaną dodane 
 
-/* Reasumując: Jeżeli wywołujemy metody, czy chcemy dostać sie do zawartości własciwości, to w tle tworzony jest tymaczowy obiekt danego typu, który "opakowuje" nasz typ prosty na czas dotarcia do właściwości czy wywowłania metody.*/
 
-// Możemy też tworzyć takie obiekty sami (abstachując już od opakowania typów prostych). Ale bardzo rzadko ma to sens, ponieważ takie obiekty mają częstoi inne zachowania niż typy proste np. każdy obiekt zwraca np. true, a operator typeof zwróci "object", a nie rodzaj typu prostego. problemy pojawią się także przy operatorze porównania "==="). Tworzenie obektu (String, Number, Boolean) jest trudniejsze niż prosty literał.
-const userName = new String("Jagienka");
-const userID = new Number(2);
-const famale = new Boolean(true);
+//Wykorzystanie wbudowanego obiektu Math. Ma wiele metod, które możemy wykorzystać w naszym programie
+Math.round(200.55); //zaokrąglenie w górę
+Math.round(200.45); //zaokrąglenie w dół 
+Math.floor(200.55); //pozbywamy się ułamka (po prostu jest usuwany, nie ma tu żadnego zaokrąglenia)
+Math.random(); //zwraca losową liczbę z przedziału od 0 do 1 (bez 1) czyli wynik >= 0 i <1 np. 0.3298483234
 
-//Na przyszłość: String, Number i Boolean to przykłady konstrukturów czyli funkcji, które są używane do tworzenie instancji (niezależnej kopii) obiektów. Operator "new" tworzy nowy obiekt. Na tym etapie nie masz jeszcze szans tego zrozumieć, to zaawasnowany koncept programowania w JS, ale kiedy dojdziemy do programowania obiektowego będę to dobrze wyjaśniał i zrozumiesz ten mechanizm.  
+// Przypomnienie inkrementacji i przypisania
+
+let activeUsers = 0;
+//inkrementacja
+activeUsers++;
+// przypisanie (dodanie) wartości
+activeUsers += 7;
+// activeUsers = activeUsers + 7;
+
+// Ciekawostki
+undefined + NaN //NaN
+Infinity + undefined //NaN
+Infinity - Infinity //NaN
+Infinity - 100 //Infinity
+0 + null // 0
+1 / Infinity //0
