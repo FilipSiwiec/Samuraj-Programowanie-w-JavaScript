@@ -1,149 +1,95 @@
-//  za pomocą literału, po prostu liczba utworzy wartość typu prostego
+// typ boolean, wartośc logiczna, typ logiczny
+// tylko dwie wartości tego typu: true i false
 
-const integerExample = 100;
-const decimalExample = 100.212;
-typeof integerExample; //number w JS, w innych językach często integer dla liczb całkowitych 
-typeof decimalExample; //number w JS, w innych językach często float czy decimal
+// funkcja Boolean - zmienia wartość innego typu na wartość typu boolean
+Boolean(0) //false
+Boolean(2 >= 2) //true
+Boolean("coś") //true
+Boolean({}) //true
+Boolean(["ktoś", 100, false]) //true
+Boolean("") //false
 
-// JS akceptuje różne systemy liczbowe (poza dziesętnym)
-// Reprezentacja szesznastkowa (prefiks 0x)
-const hexNumber = 0xff; //znamy z css czyli ff to 255 w systemie dziesiętnym
+// Wartości, które są konwertowane na false:
+""; //pusty string, oczywiście też '' i ``
+0; //też -0
+NaN;
+null;
+undefined;
 
-// Mamy system ósemkowy czy binarny. System binarny to prefiks 0b
-// console.log(0b011101)
+// OPERATORY ZWRACAJĄCE TYP LOGICZNY
 
-// notacja naukowa (e)
-console.log(5e2)
-//5 i 10 do potęgi drugiej
+//większy/mniejszy porównanie
+2 > 4; // false
+6 >= 5; // true
+2 == 2; //true
+"1" == true; //konwersja na number a potem porównanie
+"1" === true; //false
+"1" === 1; //false
 
-// Przykładowe metody, które możemy wykonać na liczbie
-const newNumber = 123.45;
+// Negacja logiczna - zamień na typ logiczny (jesli nie jest) i odwróc
+!false; //true
+!0; //true
+!200; //false
+!true; //false
 
-// METODA .toFixed(), czyli zaokrągelnie
-// zaokrąglenie do liczby całkowitej (od 5 zaokrągla wzwyż, poniżej 5 w dół)
-newNumber.toFixed();
-// zaokrąglenie do jednego miejsca po przecinku
-newNumber.toFixed(1);
-// problem jeśli pracuejmy bezpośrednio na liczbie
-// 123.toFixed(0);
-123..toFixed(0);
+// podwójna negacja
+!!true
+!!0
+!!""
 
-// Ważne: po zaokrągleniu metoda toFixed zwraca wartość, która jest stringiem
+const userName1 = "Ścibor";
+const userName2 = "";
+!!userName1
+!!userName2
 
-// METODA .toString() - jawna zamiana typów z number na string z możliwością zamiany systemu liczbowego
-newNumber.toString(); //na system dziesiętny
-newNumber.toString(2); // na system dwójkowy (binarny)
-// 255.toString(16); // żle 
-// 255..toString(16);  //dobrze
-// na system szesnastkowy
+// LOGICZNE "I" (iloczyn logiczny) &&
+//oba elementy prawdziwe
+let userAge = 22;
+let userMoney = 10.2;
+let beerPrice = 11;
+// warunek
+(userAge >= 18 && userMoney > beerPrice)
 
-//METOD .toExponential() - jawna zamiana na notację naukową (też jako string)
-newNumber.toExponential()
-//przy okazji pierwszeństwo działań warto zobaczyć
-// typeof newNumber.toExponential()
-// newNumber.toExponential() == newNumber.toExponential()
+// console.log(userAge > 18 && userMoney > beerPrice);
 
-// FUNKCJE, które pozwalają zrobić rózne zadania z liczbami
+//Jak to działa
 
-// sprawdzenie czy jest liczbą całkowitą
-Number.isInteger(decimalExample) //false, bo 100.212 (wcześniej zadeklarowaliśmy i zainiclalizowaliśmy tą zmieną)
-Number.isInteger(100.1) //false
-Number.isInteger(integerExample) //true
-Number.isInteger(28001) //true
+1 && 0;
+/*
+1- Sprawdza lewą stronę, dokonując konwersji wartości (wyrażenia) na typ boolean. Jeśli jest true to sprawdza drugą stronę, jeśli nie to zwraca tę wartość. np. "" && 1 - kończy działanie po pierwszym i zwraca "" (psty string) 
 
-const integerExample2 = 100.00
-Number.isInteger(integerExample2) //true, nawet jak jest ułamek dzieisętny ale tylko w zapisie
+2 - Po przejściu do prawej strony sprawdza ją i zwraca ją.
 
-// Sprawdzenie czy dana liczba jest skończona (prawidłowa)
-Number.isFinite(2); //true
-Number.isFinite(NaN); //false
-Number.isFinite(Infinity); //false
-Number.isFinite(1e400); //false, ponieważ maksymalna liczba to 1e308, najmniejsza liczba -1e308
-Number.isFinite(3e300); //true
+Całe wyrażenie możemy potraktować jako prawdziwe tylko jeśli obie strony są prawdziwe (są true lub po konwersji na boolean będą true)
+false && false  //false
+true && false // false
+false && true // false
+true && true // true
+*/
 
-//NaN - wartość typu number, ale o nie rozpoznanej wartości (Not a Number). Liczba, która nie jest liczbą. np gdy number mnożymy przez string
-typeof NaN; //number
+// LOGICZNE "LUB" (suma logiczna, alternatywa) ||
 
-//Infinity - gdy przekrozymy maksymalne i minimalne wartości i gdy dzielimy przez 0
-typeof Infinity; //number
+const userConnections = "syn głównej księgowej";
+const userExperience = 0;
 
-// Tworzenie obiektu instancji Number
-const numberObj = new Number() //bez podania wartości da 0
-const numberObj2 = new Number("doś") //podanie stringa da NaN, true da 1, a false 0
-const umberObj3 = new Number("222.121") //da liczbę nawet jak podajemy argument jako string
-const umberObj4 = new Number(222.121) //wynik taki sam co wyżej 
+// Tylko jeden z operandów musi być true (czy konwertowany na true)
+Boolean(userConnections || userExperience)
 
-// Działania arytmetyczne - przykłady
-// Reszta z działania jest zwraca - modulu
-console.log(20 % 2) //0
-// console.log(20 % 3) //2
-// console.log(20 % 21) //20
+1 || 0;
+/*
+1- Sprawdza lewą stronę, dokonując konwersji wartości (wyrażenia) na typ boolean. Jeśli jest true to NIE SPRAWDZA już drugiej strony i zwraca wartość, którą sprawdzał (tak byłoby w przykładzie 1 || 0). Warunek na tym etapie jest już rpawdziwy. Jeśli jest false, to przechodzi do sprawdzenie argumentu z prawej strony np. "" || 0;
 
-// Potęgowanie
-2 ** 8
-2 * 8
-2 / 8
-//Operatory dwuargumentowe (argumenty to operandy)
+2 - Po przejściu do prawej strony sprawdza ją (konwertuje na typ boolean jeśli nie jest) i zwraca ją niezależnie jaka będzie. Całe wyrażeniej jest prawdziwe jeśli choć jedna strona jest true (mogą być też obie)
+
+false || false  //false
+true || false // true
+false || true // true
+true || true // true
+*/
 
 
-//Konwersja niejawna/automatyczna (coercion) liczby w stringa lub stringa w liczbę (przy różnych operatorach)
-// konkatenacja
-20 + "20" //"2020"
-20 * "20" //400
-
-// Konwersja jawna - inny typ w number
-Number('210'); //210
+// Konwersja w drugą stronę - z boolean na inny typ (number i string)
 Number(true); //1
-Number(""); //0
-Number("cos"); //NaN - jeśli czegoś nie może zamienić w liczbę
-
-//Wykorzystanie konwersji niejawnej
-// trick - przemnożyć przez jeden bo mnożenie zamienia stringa na number
-"20" * 1
- // Sztuczka działająca (hack)
- + "20"
-// Natomiast liczbę na stringa możemy zamienić dodając pusty strong
-20 + ""
-
-//Gdy chcemy typ number zamienić na typ string (toString było wyżej, ale przypominam) 
-200..toString();
-String(200);
-// oczywiście najczęsciej konwertujemy odwołujace się do zmiennej, a nie bezpośrednio liczbę
-
-// Również parseInt() pozwala nam zmienić stringa w number. Najpierw podajemy string (w którym jest liczba) a potem możemy powiedzieć w jakim jest systemie. Wynikiem działania funkcji będzie number w zapisie dziesiętnym
-parseInt('20', 10) //20
-parseInt('100', 2) //4
-parseInt('0xff', 16) //255
-// Druga wartość jest niepotrzebna jeśli chcemy uzyskać wartość dziesiętną
-parseInt('100') //100
-parseInt('200') //200
-parseInt('0xff') //255
-parseInt("222abc") //222 bo usunie litery. Działa jeśli liczba występuje jako pierwsza
-parseInt("22.55") //usunie to co po kropce 22
-parseFloat("2.22") // nie usuwa.
-
-parseInt('200') + parseInt("3"); //najpierw wykonają się metody a potem (na tym etapie będą już typu number) zostaną dodane 
-
-
-//Wykorzystanie wbudowanego obiektu Math. Ma wiele metod, które możemy wykorzystać w naszym programie
-Math.round(200.55); //zaokrąglenie w górę
-Math.round(200.45); //zaokrąglenie w dół 
-Math.floor(200.55); //pozbywamy się ułamka (po prostu jest usuwany, nie ma tu żadnego zaokrąglenia)
-Math.random(); //zwraca losową liczbę z przedziału od 0 do 1 (bez 1) czyli wynik >= 0 i <1 np. 0.3298483234
-
-// Przypomnienie inkrementacji i przypisania
-
-let activeUsers = 0;
-//inkrementacja
-activeUsers++;
-// przypisanie (dodanie) wartości
-activeUsers += 7;
-// activeUsers = activeUsers + 7;
-
-// Ciekawostki
-undefined + NaN //NaN
-Infinity + undefined //NaN
-Infinity - Infinity //NaN
-Infinity - 100 //Infinity
-0 + null // 0
-1 / Infinity //0
+Number(false); //0
+String(true); // "true"
+String(false); // false
