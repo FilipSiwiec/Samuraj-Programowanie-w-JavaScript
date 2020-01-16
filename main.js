@@ -175,5 +175,5 @@ const letters = "Marek Adam Justyna Teresa".split('');
 "Gdańsk, Elbląg, Gdynia, Sopot, Władysławowo, Hel".split(',', 3);
 "Gdańsk, Elbląg, Gdynia, Sopot, Władysławowo, Hel".split(', ', 3);
 
-const datesOfBirth = "1967,1982, 1990, 1998, 1976"
+const datesOfBirth = "1967, 1982, 1990, 1998, 1976"
 datesOfBirth.split(',')
