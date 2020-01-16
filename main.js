@@ -1,179 +1,82 @@
-// TABLICA - METODY
-
-const italianUsers = ["Giovanni", "Michele", "Angelo", "Luigi", "Valentina", "Marco"];
-// console.log(italianUsers);
-
-
-
-// PODSTAWOWE METODA, KTÓRE TRZEBA ZNAĆ
-
-
-// PUSH - dodaj element na końcu tablicy
-
-// italianUsers.push("Alessandra");
-// console.log(italianUsers);
-
-
-
-// UNSHIFT - dodaj element na początku tablicy
-
-// italianUsers.unshift("Tommaso");
-// console.log(italianUsers);
-
-
-
-// POP - Usuń ostatni element tablicy
-// Usunięcie wartości i indeksu (nie tylko wartości)
-
-// const deletedUser = italianUsers.pop()
-// console.log(italianUsers);
-
-// delete italianUsers[italianUsers.length - 1] //zmiana wartości ostatniego  na udenfined
-
-/* ---------------------------------  */
-
-// SHIFT - Usuń pierwszy element
-// Usunięcie wartości i indeksu (nie tylko wartości)
-
-// italianUsers.shift();
-// italianUsers.shift();
-// console.log(italianUsers);
-// delete italianUsers[0] //zmiana wartości pierwszego na udenfined
-
-// CO ZWRACAJĄ TE METODY (BO OPRÓCZ TEGO, ŻE COŚ ROBIĄ /POWYŻEJ/ TO COŚ ZWRACAJĄ)
-
-// const removedLastElement = italianUsers.pop(); //metoda zwraca element (ostatni element tablicy), który został usunięty
-
-// const removedFirstElement = italianUsers.shift(); //metoda zwraca element (pierwszy element tablicy), który został usunięty.
-
-const lengthArrayAfterPush = italianUsers.push("Vito"); //metoda zwraca długoś tablicy jaką ma tablica po jej wykonaniu
-const lengthArrayAfterUnshift = italianUsers.unshift("Apollonia"); //też zwraca długoś po dodaniu
-
-
-/* ------------------------------------ */
-
-// METODA CONCAT
-// łączenie tablic. W istocie nie tyle łaczy dwie (czy więcej) tablic, a na ich podstawie tworzy nową
-
-const redColors = ["czerwony", "zachodzącego słońca", "krwisty"];
-const greenColors = ["zielony", "trawiasty", "zielony banan"];
-
-// const redAndGreenColors = redColors.concat(greenColors);
-const redGreenBlueColors = redColors.concat(greenColors, ["morski"]);
-
-// Inny, nowy sposób (od ES6) to operator spread (operator rozwijania, operator trzech kropek)
-const colorsCollections = [...redColors, ...greenColors]; //elementy tablicy są pojedyńczo wyjęte.
-// ...redColors  - "czerwony", "zachodzącego słońca", "krwisty"
-
-const colorsCollections2 = [...redColors, ...greenColors, "morski"];
-
-
-/* -------------------------------- */
-const items = ["zad", "bza", "wus", "xad", "coe", "mer", "tve"]
-
-// METODA SLICE
-// zwraca nową tablicę, która składa się z części tablicy na której jest wykownywany. Jeśli damy tylko jeden argument, to będzie zwracała od tego elementu (od tego indexu) do końca
-items.slice(3);
-// drugi argument mówi, do którego elementu (index), ale bez tego elementy
-items.slice(2, 3);
-// a tak jak poniżej mozemy pobrać całą tablicę
-// items.slice(0, items.length);
-// lub
-// const newItems = items.slice(0);
-
-// Jeśli użyjemy minusa to mówimy ile od końca mamy zwrócić, w przykłądzie poniżej będzie tylko ostatni element
-items.slice(-1);
-
-//! Pamiętajmy, że slice nie wpływa na tablicę na której jest wykonywany, więc najczesciej przypiszemy zwróconą wartość do nowej zmiennej
-
-const newItems = items.slice(0, 3); //trzy pierwsze elementy
-
-/* -------------------------------- */
-
-
-// METODA SPLICE
-// Przykład metody destrukcyjnej (destructive method, mutating method - zmianiają tablicę na której są wywyoływane)
-// Ta metoda zmienia tablice (modyfikuje) na której jest wykonywana
-const animals = ["dog", "cat", "canary", "mouse"];
-// animals.splice(1, 2); //od indeksu pierwszego (czyli 2 element) usuń 2 elementy.
-// animals.splice(2); //usunie wszystkie elmenty od index 2, łącznie z nim element (usunie index-y, a więc zmniejszy długość tablicy)
-// animals.splice(0); //wyzeruje całą tablicę
-
-
-// Metoda splice umożliwia nam też zastąpienie usunietych elementów
-
-// animals.splice(3, 1, 'hamster');
-// animals.splice(0, 2, 'fishes', 'snake');
-
-// Umożliwia nam też dodawanie nowych elementów
-
-// animals.splice(2, 0, "rat");
-// animals.splice(0, 0, "horse", "pig", "donkey");
-
-// BARDZO WAŻNE. Metod splice nie tylko wykonuje operacje na tablicy (zmienie ją), ale też zwraca wartości, kóre usuwa w formie tablicy. Więc to co usunięmy możemy wykorzystać.
-
-// const pets = animals.splice(0, 3);
-
-
-
-/* -------------------------------- */
-
-// METODA SORT
-//metoda destrukcyjna
-["Marek", "Zenek", "Arek"].sort();
-// animals.sort();
-
-/* -------------------------------- */
-
-// METODA INDEXOF
-// szuka takiego elementu w tablicy, jeśli znajdzie zwraca index tego elementu, jeśli nie zwraca -1;
-animals.indexOf('canary');
-["Arek", 22, null, 22].indexOf(22);
-["Arek", 22, null, 22].lastIndexOf(22);
-["Arek", 22, null, 22].indexOf("Are"); //-1
-
-
-/* -------------------------------- */
-
-// METODA INCLUDES
-animals.includes("rat");
-animals.includes("canary");
-[20, 22, 120, 120].includes("22"); //false
-[20, 22, 120, 120].includes(120); //true
-
-
-/* -------------------------------- */
-
-// METODA JOIN
-// Tworzy stringa z elementów, domyślnie oddzielonych przecinkiem. Możemy to jednak zmienić.
-items.join(); //string oddzielony przeciwnikem
-items.join(" --- ");
-//w "przyjaznym" państwie można z automatu dodawać bonusy 
-items.join(" - 10 lat w obozie pracy; \n ");
-
-/* -------------------------------- */
-
-// METODA REVERSE
-//metoda destrukcyjna
-//odwraca kolejność
-
-// items.reverse();
-["a", 3, "z", "koniec"].reverse();
-
-
-/* -------------------------------- */
-
-/* -------------------------------- */
-
-
-//METODA SPLIT, KTÓRĄ MOŻNA WYKONAĆ NA STRING, A TWORZY TABLICĘ
-const letters = "Marek Adam Justyna Teresa".split('');
-
-"Marek Adam Justyna Teresa".split(' ');
-"Gdańsk,Elbląg,Gdynia,Sopot,Władysławowo,Hel".split(',')
- ;
-"Gdańsk, Elbląg, Gdynia, Sopot, Władysławowo, Hel".split(',', 3);
-"Gdańsk, Elbląg, Gdynia, Sopot, Władysławowo, Hel".split(', ', 3);
-
-const datesOfBirth = "1967, 1982, 1990, 1998, 1976"
-datesOfBirth.split(',')
+//  LOOPS - PĘTLE
+
+// Pętla umożliwia wielokrotne wykonanie kodu.
+// Pętla pozwala wykonywać blok kodu wielokrotnie, tyle razy ile spełniony jest określony warunek.
+// Pętla pozwala pracować na elementach tablicy czy obiektu.
+// Pętla opiera się na sprawdzeniu warunku. Pętla jest tak długo wykonywana jak spełniony jest warunek
+
+// FOR
+
+/* for (inicjalizacja iteratora; warunek; zwiększenie iteratora) {
+ blok kodu
+} */
+// for - słowo kluczowe
+
+for (let i = 0; i <= 2; i++) {
+    console.log("wyświetlenie " + i);
+   }
+   
+   // Działanie
+   // 1 - inicjalizacja następuje raz (konwencja mówi, że nazywamy iterator zmienną i. Powinien to być let, a nie var czy bez deklaracji). Najczęściej deklarujemy iterator jako 0.
+   // 2 - warunek jest sprawdzany za każdym razem (przed wykoneniem bloku). Warunek jest konwertowany do true/flase. Jeśli false pętla kńczy działanie a program idzie dalej. Jeśli true, program idzie do bloku kodu
+   // 3 - Wykonanie kodu ( o ile warunek jest prawdziwy)
+   // 4 - po wykonaniu bloku zwiększa iterator (najczęsciej o 1 za pomocą inkrementacji, ale nie jest to konieczne)
+   // DALEJ: Nowa pętla od punktu 2 (inicjalizacja jest robiona tylko raz)
+   
+   // Tylko warunek potrzebny (choć coś takiego rzadko zrobimy). Iteracje można zrobić w pętli a iterator zainicjalizować poza nią.
+   // let i = 0;
+   // for (; i < 10;) {
+   //  console.log(i);
+   //  i++;
+   // }
+   
+   // WHILE 
+   
+   // Uruchomiaj blok kodu tak długo jak warunek jest prawdziwy
+   
+   
+   // Konstrukcja
+   /*  
+   while (warunek) {
+    blok kodu
+   }
+   */
+   while (false) {
+    console.log("działa");
+   }
+   // Jeśli warunek jest prawdziwy i nie jest zmieniony (lub zmieniony ale zawsze prawdziwy) to mamy nieskończoną pętle i zawieszoną przeglądarkę.
+   
+   // Przykład 1
+   // let number = 0;
+   // while (number < 10) {
+   //  number++;
+   //  console.log(number);
+   // }
+   
+   // Przykład 2
+   // let money = 100;
+   // while (money >= 8) {
+   //  console.log("Mam jeszcze " + money + " złotych. To pijemy piwko!");
+   //  money -= 8;
+   // }
+   
+   // alert(`za ${money} złote, już piwka nie kupię :((((`)
+   
+   // Przykład 3
+   // let gasoline = 40;
+   // let km = 0;
+   
+   // while (gasoline--) {
+   //  km += 18;
+   //  console.log("Przejechaliśmy " + km + " kilometrów. Została nam jeszcze " + gasoline + " litrów benzyny");
+   // }
+   
+   
+   //DO...WHILE
+   //Blok zawsze wykona się co najmniej raz. Czy będzie sie wykonywał dalej zależy od tego czy warunek będzie spełniony.
+   
+   let study = "nie, wyrzucili mnie"
+   
+   do {
+    console.log('Idę do szkoły');
+   } while (study === true);
