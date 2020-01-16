@@ -41,9 +41,9 @@ for (let i = 0; i <= 2; i++) {
     blok kodu
    }
    */
-   while (false) {
-    console.log("działa");
-   }
+//    while (false) {
+//     console.log("działa");
+//    }
    // Jeśli warunek jest prawdziwy i nie jest zmieniony (lub zmieniony ale zawsze prawdziwy) to mamy nieskończoną pętle i zawieszoną przeglądarkę.
    
    // Przykład 1
@@ -75,8 +75,8 @@ for (let i = 0; i <= 2; i++) {
    //DO...WHILE
    //Blok zawsze wykona się co najmniej raz. Czy będzie sie wykonywał dalej zależy od tego czy warunek będzie spełniony.
    
-   let study = "nie, wyrzucili mnie"
+//    let study = "nie, wyrzucili mnie"
    
-   do {
-    console.log('Idę do szkoły');
-   } while (study === true);
+//    do {
+//     console.log('Idę do szkoły');
+//    } while (study === true);
