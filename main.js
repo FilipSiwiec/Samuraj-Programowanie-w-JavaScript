@@ -7,7 +7,7 @@
 const condition = 2;
 
 if (condition) {
- // alert("działa!");
+//  alert("działa!");
  console.log("widzisz mnie ponieważ warunek jest prawdziwy i wykonuje zawartość bloku instrukcji warunkowej");
 }
 
