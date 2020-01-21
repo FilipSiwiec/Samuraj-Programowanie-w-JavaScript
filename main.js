@@ -2,7 +2,8 @@
 
 // for (let i = 0; i < 3; i++) {
 //  for (let j = 0; j < 10; j++) {
-//   console.log(`zmienna i czyli ${i} pomnożona przez zmienną j czyli ${j} da wynik ${i * j}`);
+//   console.log(`zmienna i czyli ${i} pomnożona 
+//   przez zmienną j czyli ${j} da wynik ${i * j}`);
 //  }
 // }
 
@@ -15,7 +16,7 @@
 // const usersAge = [19, 18, 15, 45, 34, 33, 25];
 
 // for (let i = 0; i < usersAge.length; i++) {
-//  // console.log(`użytkownik o indeksie ${i} jest w wieku ${usersAge[i]}`);
+//  console.log(`użytkownik o indeksie ${i} jest w wieku ${usersAge[i]}`);
 
 //  console.log('użytkownik o indeksie ' + i + ' jest w wieku ' + usersAge[i]);
 // }
