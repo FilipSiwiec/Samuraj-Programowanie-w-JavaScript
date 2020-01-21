@@ -3,19 +3,19 @@
 // jeśli nie podamy argumentu na etapie wywołania to funckja weźmie argumenty domyślne
 
 // Tworzenie funkcji z pomocą fat arrow
-const addTwoNumbers = (x = 0, y = 0) => {
+// const addTwoNumbers = (x = 0, y = 0) => {
+//     const result = x + y;
+//     console.log(result);
+//     return result;
+//    }
+   
+   
+   // Deklaracja funkcji (to samo ale inny sposób tworzenie) 
+   const addTwoNumbers = function(x = 0, y = 0) {
     const result = x + y;
     console.log(result);
     return result;
    }
-   
-   
-   // Deklaracja funkcji (to samo ale inny sposób tworzenie) 
-   // const addTwoNumbers = function(x = 0, y = 0) {
-   //  const result = x + y;
-   //  console.log(result);
-   //  return result;
-   // }
    
    // Bez wartości domyślnych gdybyśmy nie podali argumentów otrzymalibyśmy undefined w miejscu ich wykorzystania.
    
@@ -29,21 +29,21 @@ const addTwoNumbers = (x = 0, y = 0) => {
    
    //1. Przykład callback
    
-   function count(x, callback) {
-    return callback(x)
-   }
+//    function count(x, callback) {
+//     return callback(x)
+//    }
    
-   function addOne(item) {
-    item++
-    console.log(item);
-    return item;
-   }
+//    function addOne(item) {
+//     item++
+//     console.log(item);
+//     return item;
+//    }
    
-   function subtractOne(number) {
-    number--
-    console.log(number);
-    return number;
-   }
+//    function subtractOne(number) {
+//     number--
+//     console.log(number);
+//     return number;
+//    }
    
    // const result = count(5, addOne)
    // count(5, addOne)
@@ -70,8 +70,8 @@ const addTwoNumbers = (x = 0, y = 0) => {
    
    const usersAge = [20, 30, 21, 17, 67, 96, 55];
    
-   // usersAge.forEach(userAge => console.log(`Wiek użytkownika to ${userAge}`));
-   // usersAge.forEach(function(userAge) { console.log("Wiek użytkownika to " + userAge); });
+//    usersAge.forEach(userAge => console.log(`Wiek użytkownika to ${userAge}`));
+//    usersAge.forEach(function(userAge) { console.log("Wiek użytkownika to " + userAge); });
    
    
    /* ----------------------------------------- */
@@ -86,7 +86,7 @@ const addTwoNumbers = (x = 0, y = 0) => {
     console.log(Array.isArray(arguments));
    }
    
-   // showArguments("5", null, {})
+   showArguments("5", null, {})
    
    // Wykorzystanie w praktyce
    
