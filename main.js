@@ -1,121 +1,89 @@
-/* ZAKRES LOKALNY (BLOK)  - ZAKRES BLOKOWY*/
+// OBIEKTY - WPROWADZENIE
 
-// Taki zakres nie istniał przed wprowadznei elet i const (była tylko funkcja), wiec pojawił się w ES6
-
-
-// Przykład 1 
-
-// let var1 = 1;
-// const var2 = 2;
-// var var3 = 3;
-
-// {
-// //  let var1 = "wewnętrzne 1";
-// //  const var2 = "wewnętrzne 2";
-// //  var var3 = "wewnętrzne 3"
-// //  console.log(var1);
-// //  console.log(var2);
-// //  console.log(var3);
-//  var1 = "wewnętrzne 1"; 
-// //  var2 = "wewnętrzne 2";
-//  var3 = "wewnętrzne 3";
-//  const var4 = "coś"
-// }
-// console.log(var1);
-// console.log(var2);
-// console.log(var3);
-// console.log(var4);
+// -- Nieuporządkowana lista właściwości złożonych z nazwy (klucza) i wartości (para key - value). Nazwa jest łańcuchem a wartość może być dowolnym typem. Jeśli wartością jest funkcja mówimy wtedy, że dana własciwość jest metodą.
 
 
+// TWORZENIE OBIEKTU 
 
-// // PRZYKŁAD 2
+//operator new i konstruktor obiektu (funkcja)
 
-// const a = "1 w zakresie globalnym";
-// let b = "2 w zakresie globalnym";
-// var c = "3 w zakresie globalnym";
+// 1 - tworzymy obiekt
+const cat = new Object();
 
-// if (true) {
-// //  console.log(a) // zmienna globalna jest widoczna w bloku.
-// //  a = "przypisanie do a? Ale którego?"
-//  const a = "1 w bloku";
-// //  console.log("a w bloku to:" + a);
-// //  b = "2 w bloku";
-// //  console.log("b w bloku to:" + b);
-//  var c = "3 w bloku";
-// }
-
-// console.log(a);
-// console.log(c);
-
-// Zakres zmiennej a jej widoczność. Widoczność moze być przysłaniania
-
-
-
-// PRZYKŁAD 3
-
-// let i = 100;
-
-// for (let i = 0; i < 10; i++) {
-// //  let i = 10;
-// //  console.log(i);
-//  const inFor = "wewnątrz pętli";
-//     if (i < 4) {
-//         // i = 10;
-//         // let i = 20;
-//         // inFor = "wewnątrz pętli i wewnątrz instrukcji warunkowej";
-//         const inFor = "wewnątrz pętli i wewnątrz instrukcji warunkowej";
-//         // console.log("i wewnątrz instrukcji warunkowej, w pętli " + i);
-//         console.log(inFor);
-//  }
-
-// }
-
-
-
-// PRZYKŁAD 4
-
-// Zakres zagnieżdzony w innym zakresie. Zakres lokalny moze być zagnieżdzony w innym zakresie lokalnym.
-// Najpierw sprawdzany jest aktualny zakres, potem wyższy (jeśli jest tak potrzeba). Wreszcie (jeśli dana zmienne nie została odnazleiona) sprawdzony zostanie zakres globalny.
-
-let example1 = "globalna";
-
-if (true) {
- let example2 = "zakres lokalny. dla którego zakresem zewnętrznym jest zakres globalny"
-        
-
-
- if (true) {
-  let example3 = "zakres lokalny. dla którego zakresem zewnętrznym jest inny zakres lokalny"
-  example1 = "nowa wartość";
-  console.log(example1);
-  console.log(example2);
-  console.log(example3);
- }
-
+// 2 - przypisujemy mu właściwości
+cat.name = "Gacek";
+cat['age'] = 2;
+// cat.age = 2; // dokładnie to sam
+cat['eye color'] = 'red';
+cat.meow = function() {
+ console.log("miau miau");
 }
 
 
-// /* CO TO JEST ZAKRES - JESZCZE RAZ */
+//literał obiektu {} - efekt jest taki sam co przy konstruktorze
+
+//  1 - tworzymy obiekt i od razu przypisujemy własciwości
+const hamster = {};
 
 
-// // Reguły wykorzystania zmiennych podczas wykonywania kodu.
+const dog = {
 
-// // Zakres to lista wszystkich zadeklarowanych indentyfikatorów (zmienne)możliwych do użycia w danym momencie wykonywania programu.
+ name: ['Fafik', "Azor"],
 
-// // Zakres mówi gdzie dana zmienna jest widoczna i gdzie może być wykorzystana.
+ age: 9,
 
-// // Zakres globalny i zakres lokalny (zakres blokowy lub w funkcji).
+ 'eye color': 'black',
 
-// // W naszym programie (złożonym) istnieje mnóstwo zakresów. Każdy blok, funkcja, towrzy swój zakres. Jeden zakres może być zagnieżdzony w innym zakresie. 
+ barking: function() {
+  console.log("hau hau");
+ },
 
-// //Zakres jest zależny od tego gdzie dana zmienna znajduje się w kodzie (gdzie została utworzona).
+ // ES6
+ squeaking() {
+  console.log('aaaa uuu eee');
+ },
+}
 
-// // Zasady szukanie zmiennej:
-// //  -- najpierw zakres w którym jesteśmy. Póki nie znajdzie przeszukuje do zakresu najwyższego (zakres globalny)
-// // -- Po znaleznieniu (dopasowaniu) pierwszej pasujacej zmiennej pozostałe nie są już szukane.
+// 2 - możemy dynamicznie dodwać (zmieniać) własciwości
+dog.castrated = false;
+dog.childrens = ['bobik', 'jagódka', 'muszka']
+dog.castrated = true;
 
+// DOSTĘP DO WŁAŚCIWOŚCI I METOD
 
+// console.log(dog.name);
+// dog.barking()
+// dog.squeaking()
 
+// USUWANIE
 
+delete dog.childrens;
 
+// PRZYKŁAD1
+//Odwołanie do obiektu w innej funkcji
 
+let value = 1;
+
+const result = {
+ value: 1,
+}
+
+function plus() {
+ value++;
+ result.value++;
+ // return "dodane"
+}
+
+// PRZYKŁAD2
+//Odwołanie do obiektu w metodzie (this)
+
+const counter = {
+ score: 0,
+
+ increment: function() {
+  this.score++;
+  console.log(this.score);
+ }
+}
+
+counter.increment()
