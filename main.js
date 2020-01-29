@@ -1,89 +1,66 @@
-// OBIEKTY - WPROWADZENIE
+// TEMPLATE STRING - LITERAŁ SZABLONU
 
-// -- Nieuporządkowana lista właściwości złożonych z nazwy (klucza) i wartości (para key - value). Nazwa jest łańcuchem a wartość może być dowolnym typem. Jeśli wartością jest funkcja mówimy wtedy, że dana własciwość jest metodą.
+//grawis, lewy apostrof
+`tekst`;
+"tekst";
+'tekst';
 
+//Użycie pojedyńczych i podwójnych cudzysłowów w środku jest możliwe
+`"I'm only human" - Alexander The Great`;
+// "\"I'm only human\" - Alexander The Great";
+// '"I\'m only human" - Alexander The Great';
 
-// TWORZENIE OBIEKTU 
-
-//operator new i konstruktor obiektu (funkcja)
-
-// 1 - tworzymy obiekt
-const cat = new Object();
-
-// 2 - przypisujemy mu właściwości
-cat.name = "Gacek";
-cat['age'] = 2;
-// cat.age = 2; // dokładnie to sam
-cat['eye color'] = 'red';
-cat.meow = function() {
- console.log("miau miau");
-}
-
-
-//literał obiektu {} - efekt jest taki sam co przy konstruktorze
-
-//  1 - tworzymy obiekt i od razu przypisujemy własciwości
-const hamster = {};
+// wielowierszowe stringi
+// ES5
+const text1 = "tekst\ntekst\ntekst";
+// ES6
+const text2 = `tekst
+tekst
+tekst`;
 
 
-const dog = {
+// ${} - osadzanie kodu JS wewnatrz stringa
 
- name: ['Fafik', "Azor"],
+const yourName = "Jagienka";
 
- age: 9,
+//Możliwość wstrzykiwania kodu wewnatrz stringa
+const greeting = `Cześć ${yourName}!`;
 
- 'eye color': 'black',
+// Podobny efekt możemy uzyskać za pomocą konkatenacji
+const greeting2 = "Cześć " + yourName + "!";
 
- barking: function() {
-  console.log("hau hau");
- },
 
- // ES6
- squeaking() {
-  console.log('aaaa uuu eee');
- },
-}
+//Możliwość użycia wyrażenia (wyrażenie jest wykonywane i zwracany jest wynik)
 
-// 2 - możemy dynamicznie dodwać (zmieniać) własciwości
-dog.castrated = false;
-dog.childrens = ['bobik', 'jagódka', 'muszka']
-dog.castrated = true;
+const user1 = 29;
+const user2 = 45;
+const user3 = 34;
 
-// DOSTĘP DO WŁAŚCIWOŚCI I METOD
+// console.log(`Średni wiek użytkowników to: ${(user1 + user2 + user3) / 3}, a łączny wiek to ${user1 + user2 + user3} lat`);
 
-// console.log(dog.name);
-// dog.barking()
-// dog.squeaking()
 
-// USUWANIE
+// Pobranie i wyświetlenie aktualnej daty
 
-delete dog.childrens;
+// console.log(`Obecnie zegarek wskazuje ${new Date().toLocaleString()}`);
 
-// PRZYKŁAD1
-//Odwołanie do obiektu w innej funkcji
+// Obliczenie
 
-let value = 1;
+const price = 76.0;
+const tax = 23;
 
-const result = {
- value: 1,
-}
+// console.log(`Do zapłaty: ${price + (price * tax) / 100} złotych`)
 
-function plus() {
- value++;
- result.value++;
- // return "dodane"
-}
+// console.log(`Do zapłaty: ${(price + (price * tax) / 100).toFixed(2)} złotych`)
 
-// PRZYKŁAD2
-//Odwołanie do obiektu w metodzie (this)
 
-const counter = {
- score: 0,
+// Często wykorzystujemy w wyrażeniu operator trójargumentowy
 
- increment: function() {
-  this.score++;
-  console.log(this.score);
- }
-}
+// console.log(`Dzisiejsza cena netto jest ${price >= 80 ? "wysoka" : "niska"}.`)
 
-counter.increment()
+
+// Inkrementacaj/dekrementacja
+
+let itemName = "lcd"
+let items = 20;
+console.log(`Własnie sprzedałem jeden ${itemName}. Na stanie jest jeszcze ${--items}`)
+
