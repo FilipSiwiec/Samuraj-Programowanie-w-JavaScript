@@ -1,66 +1,69 @@
-// TEMPLATE STRING - LITERAŁ SZABLONU
+/* CZYM JEST DOM */
 
-//grawis, lewy apostrof
-`tekst`;
-"tekst";
-'tekst';
-
-//Użycie pojedyńczych i podwójnych cudzysłowów w środku jest możliwe
-`"I'm only human" - Alexander The Great`;
-// "\"I'm only human\" - Alexander The Great";
-// '"I\'m only human" - Alexander The Great';
-
-// wielowierszowe stringi
-// ES5
-const text1 = "tekst\ntekst\ntekst";
-// ES6
-const text2 = `tekst
-tekst
-tekst`;
+//  -- reprezentacja dokumentu HTML w przeglądarce.
+//  -- elementy strony (tag,tekst, atrybut) są węzłami, które mogą być pobrane, modyfifowane. Mozna też usuwać węzły i tworzyć nowe.
+//  -- Struktura DOM przypomina drzewo. Na szczycie (na początku) jest obiekt document.
+//  -- DOM nie jest częścią JS, ale JS umożliwia pracę z DOM
 
 
-// ${} - osadzanie kodu JS wewnatrz stringa
+/* POBIERANIE ELEMENTÓW ZE STRONY */
 
-const yourName = "Jagienka";
+// właściowości obiektu document
+document.documentElement // dostęp do węzła html
+document.body // dostęp do węzła body
+document.images  //dostęp do obiektu (HTMLCollection -obiekt tablicopodobny) zawierającego wszystkie img w dokumencie (jeśli ich nie ma to obiekt jest pusty). Obiekt ten przypomina tablicę ponieważ ma length i do poszczególnych elementów można się dostać za pomocą notacje tablicy). 
 
-//Możliwość wstrzykiwania kodu wewnatrz stringa
-const greeting = `Cześć ${yourName}!`;
-
-// Podobny efekt możemy uzyskać za pomocą konkatenacji
-const greeting2 = "Cześć " + yourName + "!";
-
-
-//Możliwość użycia wyrażenia (wyrażenie jest wykonywane i zwracany jest wynik)
-
-const user1 = 29;
-const user2 = 45;
-const user3 = 34;
-
-// console.log(`Średni wiek użytkowników to: ${(user1 + user2 + user3) / 3}, a łączny wiek to ${user1 + user2 + user3} lat`);
+// Taki obiekt łatwo przerobić na tablicę na dwa sposoby:
+const imgs = Array.from(document.images);
+const imgs2 = [...document.images];
 
 
-// Pobranie i wyświetlenie aktualnej daty
 
-// console.log(`Obecnie zegarek wskazuje ${new Date().toLocaleString()}`);
+// Metody pobierające JEDEN element
 
-// Obliczenie
-
-const price = 76.0;
-const tax = 23;
-
-// console.log(`Do zapłaty: ${price + (price * tax) / 100} złotych`)
-
-// console.log(`Do zapłaty: ${(price + (price * tax) / 100).toFixed(2)} złotych`)
+document.querySelector("li:nth-child(3)"); //jak selektor CSS
+const firstElement = document.getElementById('car'); //Jako argument przy wywołaniu metody podajemy identyfikator
 
 
-// Często wykorzystujemy w wyrażeniu operator trójargumentowy
-
-// console.log(`Dzisiejsza cena netto jest ${price >= 80 ? "wysoka" : "niska"}.`)
+// Obie metody zwracają pierwszy znaleziony element lub null jeśli nie znalazły żadnego.
 
 
-// Inkrementacaj/dekrementacja
+// Metody pobierające WSZYSTKIE pasujace elementy
 
-let itemName = "lcd"
-let items = 20;
-console.log(`Własnie sprzedałem jeden ${itemName}. Na stanie jest jeszcze ${--items}`)
+document.querySelectorAll("* ul>li>a"); //NodeList - lista węzłów (obiekt tablicopodobny, oprócz właściwości length i mozliwości pracy z nim na notacji tablicy czyli np.[1], ma też kilka metod tablicy, ale tylko nieliczne)
+document.getElementsByTagName('li'); //HTMLCollection (obiekt tablicopodobny)
+document.getElementsByClassName("even"); //HTMLCollection (obiekt tablicopodobny)
+
+// Zwracają listę pasujacych elementów w formie tablicopodobnego obiektu (NodeList/listy węzłów w przypadku querySelectorAll i HTMLCollection/kolekcji html w przypadku dwóch pozostałych). Jeśli nie znajdują żadnego pasującego elementu to zwracany obiekt jest pusty.
+// Ten pierwszy sposób współcześne zdaje się być czesciej używany, bardziej też przypomina tablicę (ma część jej metod)
+
+// Pamiętajmy jednak, że taki pseudotablice możemy łatwo zmienic na tablicę np.
+
+const liList = document.querySelectorAll('li'); //pobranie elementów (NodeList)
+
+const liArray = [...liList]; //parametr rest do przerobienia na tablicę
+const liArray2 = Array.from(liList); //metoda do przerobienia na tablicę
+
+
+// POBIERANIE ATRYBUTÓW I ZAWARTOŚCI Z ELEMENTÓW
+
+const h2 = document.querySelector('h2');
+// console.log(h2.getAttribute('class'));
+// console.log(h2.getAttribute('data-color'));
+// console.log(h2.getAttribute('id')); //Jeśli nie ma danego atrybutu, to zwracany jest null. Jeśli jest zwraca całą zawartość atrybutu
+
+const h2Class = document.querySelector('h2').getAttribute('class');
+
+const h2Text = h2.textContent; //zawartość tekstowa
+const h2HTML = h2.innerHTML; //tekst wraz ze znacznikami html któe są wewnatrz danego elementu
+
+// classList
+//Obiekt classList przechowuje wszytskie klasy danego elelement (jeśli nie ma to jest to pusty obiekt)
+// console.log(h2.classList);
+
+// Przykładowa metoda contains dla obiektu ClassList
+h2.classList.contains("title"); // Metoda contains sprawdza czy element posiada daną klasę. Jeśli ma zwracane jest true, jeśli nie zwraca false
+
+
+
 
