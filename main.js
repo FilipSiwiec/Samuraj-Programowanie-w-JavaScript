@@ -1,50 +1,70 @@
-// MODYFIKACJA ELEMENTÓW DOM
+// NASŁUCHIWANIE I OBSŁUGA ZDARZEŃ
 
-const firstLi = document.querySelector('li:first-child');
+// Metoda addEventListener - możemy wywołać ją na dowolnym elemencie DOM oraz na window (reprezentacja okna przeglądarki).
 
-// Możemy modyfikować zawartość elementy poprzez przypisanie nowych właściwości textConten lub innerHTML. Stara wartość jest usuwana.
-firstLi.textContent = "Nowa zawartość tekstowa";
-firstLi.innerHTML = '<strong>Pogrubienie</strong> i normalnie';
-
-// Możemy też dodać do obecnej zawartości dodatkową treść np.
-firstLi.textContent += " coś nowego";
-
-// Dodawanie stylów do elementu(liniowo)
-firstLi.style.fontSize = "30px";
-firstLi.style.backgroundColor = "#ccc";
-firstLi.style.letterSpacing = "2px"
-
-// Dodawanie, odejmowanie i przełączanie klas
-// firstLi.classList.toggle("space");
-firstLi.classList.add("space");
-// firstLi.classList.remove("space");
-
-// Nadpisywanie zawartości atrybutów - przykładowo class i id. Ale można też innych atrybutów. Zwrócmy uwagę, że nie używay słowa class (które jest w JS zarezerwowane), a zamiast niego nazwa właściwości brzmi className. Z id jest już "normalnie", podobnie z .src
-firstLi.className = "one two";
-firstLi.id = "";
-
-// Ustawić zawartość atrybutu (również nadpisując ten obecny) można za pomocą metody setAttribute. Zwrócmy uwagę, że tu już możemy użyć nazwy class ponieważ jest ona przekazana w stringu (a zawartość stringa moze być dowolna i nie jest oczywiscie bolokowana przez nazwy zastrzeżone)
-firstLi.setAttribute('title', 'Uwaga, ważne');
-firstLi.setAttribute('class', 'sizeX');
-
-//setAttribute czy odniesienie do własciści (element.id czy element.className) nadpisują, więc nie zawsze śą dobrym rozwiązaniem.
-
-// Modyfikowanie wielu elementów
-
-// zamiana na tablicę, dzięki temu mamy dostęp do wielu metod, m.in. forEach
-const liItems = [...document.getElementsByTagName("li")];
-
-// liItems.style.fontSize = "40px"; // nie zadziała, bo nie przypisujemy wszystkim elementom a próbujemy tak naprawdę przypisać tablicy. Musimy odwołać się do każdego elementu osobno.
-
-// Dodanie klasy (pętla i forEach)
-
-// for (let i = 0; i < liItems.length; i++) {
-//  liItems[i].style.fontSize = "40px";
-//  liItems[i].classList.add('red');
-// }
-
-// liItems.forEach(function(item) {
-//  item.style.textDecoration = "underline";
-//  item.style.fontSize = "40px";
-//  item.classList.add('red');
-// })
+//PRZYKŁAD
+// - jako pierwszy argument podajemy nazwę zdarzenie w tym przypadku podwójne kliknięcie czyli "dblclick".
+// jako drugi argument podajemy funkcję (callback), która ma być wywołana w moemencie wystapienie zdarzenia (za każdym razem gdy wystąpi) 
+window.addEventListener("dblclick", function() {
+    console.log("podwójne kliknięcie");
+   });
+   
+   // PRZYKŁAD - możemy podać funkcję strzałkową
+   // document.body.addEventListener("click", () => console.log("kliknięcie"))
+   
+   
+   // PRZYKŁAD - mozemy też podać nazwę funkcji, która została stworzona poza metodą addEventListener
+   // const showScroll = () => {
+   //  console.log("skrol");
+   // }
+   
+   function showScroll() {
+    console.log("skrol");
+   }
+   
+   window.addEventListener("scroll", showScroll);
+   
+   
+   
+   
+   // PRZYKŁAD - metodę możemy przypisać bezposrednio do pobieranego elementu
+   // document.querySelector('h1').addEventListener('mousemove', function() {
+   //  this.textContent += "+";
+   //  console.log("ruch myszką po h1");
+   // })
+   
+   
+   
+   // PRZYKŁAD
+   const h1 = document.querySelector('h1');
+   
+   const addText = function() {
+    this.textContent += " :) "; //dodanie znaków (stringa) do istniejacej zawartości tekstowej
+    h1.classList.toggle("red"); //dodanie/zabranie klasy z elementu (dodaje jak nie ma, zabiera jak jest)
+   }
+   
+   h1.addEventListener('click', addText);
+   
+   
+   // PRZYKŁAD - nastawienie nasłuchiwania, czyli uruchomienie metody addEventListener na każdym elemencie. Pamietajmy że nie można beżposrednio na pobranym obiekcie, tylko na każdym jego elemencie osobno
+   
+   const addClassRed = function() {
+    console.log("klik li");
+   }
+   
+   const items = document.querySelectorAll("li");
+   // zapis items.addEventListener() nie zadziała, bo nie możemy ustawić nasłuchiwanie na tablicy tylko na pobranych elementach. Jak to zrobić, widać ponizej (można też użyć pętli)
+   
+   //Metoda forEach sprawia, ze podana jako argument funkcja, jest wykonywana na każdym elemencie tablicy (na każdym li) Przy czym przekazujemy do środka ten element nadając mu nazwę (w tym wypadku item) Przy wywołaniu funkcji na kzdym elemencie w tym item będzie znajdowało się kolejne il (czyli kolejna pozycja z tablicy)
+   items.forEach((item) => item.addEventListener("click", addClassRed))
+   
+   
+   // TWORZENIE I DODAWANIE ELEMENTÓW DO STRONY
+   
+   const divElement = document.createElement('div');
+   divElement.textContent = "Ostatni DIV";
+   divElement.style.backgroundColor = "red";
+   document.body.appendChild(divElement);
+   
+   
+   
