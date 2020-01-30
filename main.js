@@ -1,69 +1,50 @@
-/* CZYM JEST DOM */
+// MODYFIKACJA ELEMENTÓW DOM
 
-//  -- reprezentacja dokumentu HTML w przeglądarce.
-//  -- elementy strony (tag,tekst, atrybut) są węzłami, które mogą być pobrane, modyfifowane. Mozna też usuwać węzły i tworzyć nowe.
-//  -- Struktura DOM przypomina drzewo. Na szczycie (na początku) jest obiekt document.
-//  -- DOM nie jest częścią JS, ale JS umożliwia pracę z DOM
+const firstLi = document.querySelector('li:first-child');
 
+// Możemy modyfikować zawartość elementy poprzez przypisanie nowych właściwości textConten lub innerHTML. Stara wartość jest usuwana.
+firstLi.textContent = "Nowa zawartość tekstowa";
+firstLi.innerHTML = '<strong>Pogrubienie</strong> i normalnie';
 
-/* POBIERANIE ELEMENTÓW ZE STRONY */
+// Możemy też dodać do obecnej zawartości dodatkową treść np.
+firstLi.textContent += " coś nowego";
 
-// właściowości obiektu document
-document.documentElement // dostęp do węzła html
-document.body // dostęp do węzła body
-document.images  //dostęp do obiektu (HTMLCollection -obiekt tablicopodobny) zawierającego wszystkie img w dokumencie (jeśli ich nie ma to obiekt jest pusty). Obiekt ten przypomina tablicę ponieważ ma length i do poszczególnych elementów można się dostać za pomocą notacje tablicy). 
+// Dodawanie stylów do elementu(liniowo)
+firstLi.style.fontSize = "30px";
+firstLi.style.backgroundColor = "#ccc";
+firstLi.style.letterSpacing = "2px"
 
-// Taki obiekt łatwo przerobić na tablicę na dwa sposoby:
-const imgs = Array.from(document.images);
-const imgs2 = [...document.images];
+// Dodawanie, odejmowanie i przełączanie klas
+// firstLi.classList.toggle("space");
+firstLi.classList.add("space");
+// firstLi.classList.remove("space");
 
+// Nadpisywanie zawartości atrybutów - przykładowo class i id. Ale można też innych atrybutów. Zwrócmy uwagę, że nie używay słowa class (które jest w JS zarezerwowane), a zamiast niego nazwa właściwości brzmi className. Z id jest już "normalnie", podobnie z .src
+firstLi.className = "one two";
+firstLi.id = "";
 
+// Ustawić zawartość atrybutu (również nadpisując ten obecny) można za pomocą metody setAttribute. Zwrócmy uwagę, że tu już możemy użyć nazwy class ponieważ jest ona przekazana w stringu (a zawartość stringa moze być dowolna i nie jest oczywiscie bolokowana przez nazwy zastrzeżone)
+firstLi.setAttribute('title', 'Uwaga, ważne');
+firstLi.setAttribute('class', 'sizeX');
 
-// Metody pobierające JEDEN element
+//setAttribute czy odniesienie do własciści (element.id czy element.className) nadpisują, więc nie zawsze śą dobrym rozwiązaniem.
 
-document.querySelector("li:nth-child(3)"); //jak selektor CSS
-const firstElement = document.getElementById('car'); //Jako argument przy wywołaniu metody podajemy identyfikator
+// Modyfikowanie wielu elementów
 
+// zamiana na tablicę, dzięki temu mamy dostęp do wielu metod, m.in. forEach
+const liItems = [...document.getElementsByTagName("li")];
 
-// Obie metody zwracają pierwszy znaleziony element lub null jeśli nie znalazły żadnego.
+// liItems.style.fontSize = "40px"; // nie zadziała, bo nie przypisujemy wszystkim elementom a próbujemy tak naprawdę przypisać tablicy. Musimy odwołać się do każdego elementu osobno.
 
+// Dodanie klasy (pętla i forEach)
 
-// Metody pobierające WSZYSTKIE pasujace elementy
+// for (let i = 0; i < liItems.length; i++) {
+//  liItems[i].style.fontSize = "40px";
+//  liItems[i].classList.add('red');
+// }
 
-document.querySelectorAll("* ul>li>a"); //NodeList - lista węzłów (obiekt tablicopodobny, oprócz właściwości length i mozliwości pracy z nim na notacji tablicy czyli np.[1], ma też kilka metod tablicy, ale tylko nieliczne)
-document.getElementsByTagName('li'); //HTMLCollection (obiekt tablicopodobny)
-document.getElementsByClassName("even"); //HTMLCollection (obiekt tablicopodobny)
-
-// Zwracają listę pasujacych elementów w formie tablicopodobnego obiektu (NodeList/listy węzłów w przypadku querySelectorAll i HTMLCollection/kolekcji html w przypadku dwóch pozostałych). Jeśli nie znajdują żadnego pasującego elementu to zwracany obiekt jest pusty.
-// Ten pierwszy sposób współcześne zdaje się być czesciej używany, bardziej też przypomina tablicę (ma część jej metod)
-
-// Pamiętajmy jednak, że taki pseudotablice możemy łatwo zmienic na tablicę np.
-
-const liList = document.querySelectorAll('li'); //pobranie elementów (NodeList)
-
-const liArray = [...liList]; //parametr rest do przerobienia na tablicę
-const liArray2 = Array.from(liList); //metoda do przerobienia na tablicę
-
-
-// POBIERANIE ATRYBUTÓW I ZAWARTOŚCI Z ELEMENTÓW
-
-const h2 = document.querySelector('h2');
-// console.log(h2.getAttribute('class'));
-// console.log(h2.getAttribute('data-color'));
-// console.log(h2.getAttribute('id')); //Jeśli nie ma danego atrybutu, to zwracany jest null. Jeśli jest zwraca całą zawartość atrybutu
-
-const h2Class = document.querySelector('h2').getAttribute('class');
-
-const h2Text = h2.textContent; //zawartość tekstowa
-const h2HTML = h2.innerHTML; //tekst wraz ze znacznikami html któe są wewnatrz danego elementu
-
-// classList
-//Obiekt classList przechowuje wszytskie klasy danego elelement (jeśli nie ma to jest to pusty obiekt)
-// console.log(h2.classList);
-
-// Przykładowa metoda contains dla obiektu ClassList
-h2.classList.contains("title"); // Metoda contains sprawdza czy element posiada daną klasę. Jeśli ma zwracane jest true, jeśli nie zwraca false
-
-
-
-
+// liItems.forEach(function(item) {
+//  item.style.textDecoration = "underline";
+//  item.style.fontSize = "40px";
+//  item.classList.add('red');
+// })
