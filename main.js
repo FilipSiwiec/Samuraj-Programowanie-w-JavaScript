@@ -1,70 +1,52 @@
-// NASŁUCHIWANIE I OBSŁUGA ZDARZEŃ
+//DOM - obiektowy model dokumentu - model bieżącej strony internetowej, której głównym elementem jest document.
 
-// Metoda addEventListener - możemy wywołać ją na dowolnym elemencie DOM oraz na window (reprezentacja okna przeglądarki).
+// window - obiekt globalny dla środowiska uruchomieniowego jakim jest przeglądarka. Zawiera mnóstwo metod i własciwości do wykorzystania. Window reprezentuje okno przeglądarki (otwartą kartę)
 
-//PRZYKŁAD
-// - jako pierwszy argument podajemy nazwę zdarzenie w tym przypadku podwójne kliknięcie czyli "dblclick".
-// jako drugi argument podajemy funkcję (callback), która ma być wywołana w moemencie wystapienie zdarzenia (za każdym razem gdy wystąpi) 
-window.addEventListener("dblclick", function() {
-    console.log("podwójne kliknięcie");
-   });
-   
-   // PRZYKŁAD - możemy podać funkcję strzałkową
-   // document.body.addEventListener("click", () => console.log("kliknięcie"))
-   
-   
-   // PRZYKŁAD - mozemy też podać nazwę funkcji, która została stworzona poza metodą addEventListener
-   // const showScroll = () => {
-   //  console.log("skrol");
-   // }
-   
-   function showScroll() {
-    console.log("skrol");
-   }
-   
-   window.addEventListener("scroll", showScroll);
-   
-   
-   
-   
-   // PRZYKŁAD - metodę możemy przypisać bezposrednio do pobieranego elementu
-   // document.querySelector('h1').addEventListener('mousemove', function() {
-   //  this.textContent += "+";
-   //  console.log("ruch myszką po h1");
-   // })
-   
-   
-   
-   // PRZYKŁAD
-   const h1 = document.querySelector('h1');
-   
-   const addText = function() {
-    this.textContent += " :) "; //dodanie znaków (stringa) do istniejacej zawartości tekstowej
-    h1.classList.toggle("red"); //dodanie/zabranie klasy z elementu (dodaje jak nie ma, zabiera jak jest)
-   }
-   
-   h1.addEventListener('click', addText);
-   
-   
-   // PRZYKŁAD - nastawienie nasłuchiwania, czyli uruchomienie metody addEventListener na każdym elemencie. Pamietajmy że nie można beżposrednio na pobranym obiekcie, tylko na każdym jego elemencie osobno
-   
-   const addClassRed = function() {
-    console.log("klik li");
-   }
-   
-   const items = document.querySelectorAll("li");
-   // zapis items.addEventListener() nie zadziała, bo nie możemy ustawić nasłuchiwanie na tablicy tylko na pobranych elementach. Jak to zrobić, widać ponizej (można też użyć pętli)
-   
-   //Metoda forEach sprawia, ze podana jako argument funkcja, jest wykonywana na każdym elemencie tablicy (na każdym li) Przy czym przekazujemy do środka ten element nadając mu nazwę (w tym wypadku item) Przy wywołaniu funkcji na kzdym elemencie w tym item będzie znajdowało się kolejne il (czyli kolejna pozycja z tablicy)
-   items.forEach((item) => item.addEventListener("click", addClassRed))
-   
-   
-   // TWORZENIE I DODAWANIE ELEMENTÓW DO STRONY
-   
-   const divElement = document.createElement('div');
-   divElement.textContent = "Ostatni DIV";
-   divElement.style.backgroundColor = "red";
-   document.body.appendChild(divElement);
-   
-   
-   
+// console.log(window)
+// console.log(window.document)
+// console.log(document) //to samo co wyżej, ale nie musimy podawać w zapisie window, bo document i tak zostanie rozpoznany.
+
+// tak naprawdę mamy
+// window.console.log("w konsoli")
+
+// Przykładowe metody dla document już poznaliśmy (np. querySelector, createElement) 
+// Przykładowe właściości:
+document.title;
+document.domain;
+document.body;
+
+// Przykładowe właściwości i metody window
+
+window.innerHeight; //wysokość okna (inneWidth - szerokość)
+window.scrollY; //wartość skrola
+
+// window.alert("popup wyskakuje");
+// Nie piszemy najczęsciej window.alert() tylko alert()
+
+// funkcja setTimeout
+// Oczywiscie nie musimy pisać window na początku, ale tu by pokazać, że funckja setTimout jest metodą obiektu window.
+
+// PRZYKŁAD 1
+// window.setTimeout(() => {
+//  alert("Już 5 sekund tu jesteś!")
+// }, 5000)
+
+// PRZYKŁAD 2
+// const showTime = function() {
+//  time += 5;
+//  console.log(`Już ${time} sekund tu jesteś`);
+//  setTimeout(showTime, 5000);
+// }
+
+
+// let time = 0;
+
+// setTimeout(showTime, 5000)
+
+
+// funkcja setInterval
+// PRZYKŁAD
+
+// let timer = 0;
+
+// setInterval(() => console.log(++timer), 1000)
