@@ -1,22 +1,16 @@
 const btn = document.querySelector("button");
-let number = 1;
-let activeNumber = 1;
+const list = document.querySelector("ul");
+number = 1;
 
-const addDiv = function () {
-    const div = document.createElement("div");
-    div.textContent = number
-    // if ( number % 5 == 0){
-    //     console.log("!");
-    //     div.className = "circle";
-    // }
-    if ( activeNumber == 5){
-        div.className = "circle";
-        activeNumber = 0;
+const addLi = function() {
+    const li = document.createElement("li");
+    li.textContent = number;
+    list.appendChild(li);
+    console.log("!");
+    if ( number % 3 == 0 ){
+        li.classList = "big";
     }
-    document.body.appendChild(div);
-    console.log("?");
-    number++;
-    activeNumber++;
+    number += 2;
 }
 
-btn.addEventListener("click", addDiv);
+btn.addEventListener("click", addLi);
