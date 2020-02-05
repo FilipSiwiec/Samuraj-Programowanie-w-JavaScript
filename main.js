@@ -1,16 +1,34 @@
-const btn = document.querySelector("button");
-const list = document.querySelector("ul");
-number = 1;
+const box = document.createElement("div");
+document.body.appendChild(box);
+let size = 100;
+box.style.width = size + "px";
+box.style.height = size + "px";
 
-const addLi = function() {
-    const li = document.createElement("li");
-    li.textContent = number;
-    list.appendChild(li);
-    console.log("!");
-    if ( number % 3 == 0 ){
-        li.classList = "big";
+let flag = true;
+
+
+window.addEventListener("scroll", function(){
+    
+    if ( size >= window.innerWidth / 2  ) {
+        flag = false;
     }
-    number += 2;
-}
 
-btn.addEventListener("click", addLi);
+    else if ( size == 0 ) {
+        flag = true;
+    }
+
+    if ( flag ){
+
+        size = size + 10;
+        box.style.width = size + "px";
+        box.style.height = size + "px";
+    }
+
+    else {
+        size = size - 10;
+        box.style.width = size + "px";
+        box.style.height = size + "px";
+        console.log("minus")
+    }
+
+})

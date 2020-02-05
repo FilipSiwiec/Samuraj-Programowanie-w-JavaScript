@@ -1,7 +1,14 @@
-button{
-    font-size: 30px;
+body{
+    height: 10000px;
 }
 
-.big{
-    font-size: 25px;
+div{
+    position: fixed;
+    /* height: 100px;
+    width: 100px; */
+    background-color: black;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
 }
