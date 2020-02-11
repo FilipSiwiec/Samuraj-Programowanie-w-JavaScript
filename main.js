@@ -5,6 +5,7 @@ const init = () => {
  // tutaj kod
  console.log('dziala');
  const guzik = document.createElement("button");
+
  guzik.style.background = 'red';
  guzik.style.width = 100 + "px";
  guzik.style.height = 50 + "px";
@@ -15,6 +16,9 @@ const init = () => {
  document.body.appendChild(liczby);  
 
  guzik.addEventListener("click", createLiElements);
+
+ 
+
 }
 
 const createLiElements = () => {
