@@ -10,6 +10,7 @@ const init = () => {
  guzik.style.height = 50 + "px";
  guzik.textContent = "Dodaj 10 elementów listy";
  document.body.appendChild(guzik);  
+
  const liczby = document.createElement("ul");
  document.body.appendChild(liczby);  
 
@@ -17,10 +18,22 @@ const init = () => {
 }
 
 const createLiElements = () => {
+ 
+ 
  console.log("tez dziala");
- const liczba = document.createElement('li');
- liczba.textContent = "cos wyszlo";
- document.body.appendChild(liczba);
-}
+
+ for ( let i = 1; i < 11; i++ ){
+    
+
+    const liczba = document.createElement('li');
+    liczba.textContent = "Element nr " + orderElement;
+    orderElement++;
+    liczba.style. listStyleType= "none";
+    document.querySelector("ul").appendChild(liczba);
+    liczba.style.fontSize = size + "px";
+    size++;
+   }
+
+ }
 
 init()
