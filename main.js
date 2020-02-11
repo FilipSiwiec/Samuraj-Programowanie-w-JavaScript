@@ -1,34 +1,26 @@
-const box = document.createElement("div");
-document.body.appendChild(box);
-let size = 100;
-box.style.width = size + "px";
-box.style.height = size + "px";
+let size = 10;
+let orderElement = 1;
 
-let flag = true;
+const init = () => {
+ // tutaj kod
+ console.log('dziala');
+ const guzik = document.createElement("button");
+ guzik.style.background = 'red';
+ guzik.style.width = 100 + "px";
+ guzik.style.height = 50 + "px";
+ guzik.textContent = "Dodaj 10 elementów listy";
+ document.body.appendChild(guzik);  
+ const liczby = document.createElement("ul");
+ document.body.appendChild(liczby);  
 
+ guzik.addEventListener("click", createLiElements);
+}
 
-window.addEventListener("scroll", function(){
-    
-    if ( size >= window.innerWidth / 2  ) {
-        flag = false;
-    }
+const createLiElements = () => {
+ console.log("tez dziala");
+ const liczba = document.createElement('li');
+ liczba.textContent = "cos wyszlo";
+ document.body.appendChild(liczba);
+}
 
-    else if ( size == 0 ) {
-        flag = true;
-    }
-
-    if ( flag ){
-
-        size = size + 10;
-        box.style.width = size + "px";
-        box.style.height = size + "px";
-    }
-
-    else {
-        size = size - 10;
-        box.style.width = size + "px";
-        box.style.height = size + "px";
-        console.log("minus")
-    }
-
-})
+init()
