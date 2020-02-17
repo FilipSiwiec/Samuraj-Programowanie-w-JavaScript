@@ -1,9 +1,9 @@
 let p = document.querySelector("p");
-document.body.addEventListener("mousemove", (e => {
-// console.log(event.clientX, event.clientY)
 
-p.textContent = `${e.clientX}, ${e.clientY}`;
-// p.textContent = e.clientX + "," + e.clientY ;
-// p.textContent = `${e.screenX}, ${e.screenY}`;
+document.body.addEventListener("mousemove", (e) => {
+    console.log("dziala");
 
-}))
+    p.textContent = `${e.clientX}, ${e.clientY}`;
+
+    document.body.style.backgroundColor = `rgb(${e.clientX}, ${e.clientY} ,100)`;
+})
