@@ -3,33 +3,43 @@ const div = document.querySelector("div");
 let divX = 150;
 let divY = 100;
 
+div.style.left = `${divX}px`;
+div.style.top = `${divY}px`;
+
+let akcja = false;
+
 let insertDivX;
 let insertDivY;
 
-let drawactive = false;
-
-div.style.left = divX + "px";
-div.style.top = `${divY}px`;
-
-div.addEventListener("mousedown", () => {
-  div.style.backgroundColor = "grey"
-  drawactive = !drawactive;
+div.addEventListener("mousedown", (e) => {
+  // console.log("dole");
+  div.style.backgroundColor = "grey";
+  
+  akcja = !akcja;
 
   insertDivX = e.offsetX;
   insertDivY = e.offsetY;
-})
+  console.log(insertDivX,insertDivY);
+
+});
 
 div.addEventListener("mousemove", (e) => {
-  if (drawactive) {
-    div.style.left = `${divX - 100}px`;
-    div.style.top = `${divY - 100}px`;
+  // console.log("rusza");
 
-    divX = e.clientX;
-    divY = e.clientY;
-  }
-})
+  if(akcja){
+
+  div.style.left = `${divX}px`;
+  div.style.top = `${divY}px`;
+
+  divX = e.clientX - insertDivX;
+  divY = e.clientY - insertDivY;
+}
+
+});
 
 div.addEventListener("mouseup", () => {
+  // console.log("gora")
   div.style.backgroundColor = "black";
-  drawactive = !drawactive;
+
+  akcja = false;
 })
