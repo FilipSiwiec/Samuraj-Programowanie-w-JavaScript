@@ -1,25 +1,35 @@
-// KOLOR GENEROWANY W ZALEŻNOŚCI OD TEGO GDZIE KLIKNIEMY
+const div = document.querySelector("div");
 
-// jeśli wartość dla x (event.clientX) i y (event.clientY) jest parzysta (np. 100,122)  to kolor czerwony
-// jesli wartość dla x i y jest nieparzysta to kolor niebieski
-// jeśli jeden z kolorów jest parzysty a drugi nieparzysty to kolor zielony
+let divX = 150;
+let divY = 100;
 
+let insertDivX;
+let insertDivY;
 
+let drawactive = false;
 
-document.body.addEventListener("click", (e) => {
+div.style.left = divX + "px";
+div.style.top = `${divY}px`;
 
-  const x = e.clientX;
-  const y = e.clientY;
+div.addEventListener("mousedown", () => {
+  div.style.backgroundColor = "grey"
+  drawactive = !drawactive;
 
-  console.log(x,y)
+  insertDivX = e.offsetX;
+  insertDivY = e.offsetY;
+})
 
-  if ( x % 2 == 0 & y % 2 == 0) {
-    document.body.style.background = "red";
+div.addEventListener("mousemove", (e) => {
+  if (drawactive) {
+    div.style.left = `${divX - 100}px`;
+    div.style.top = `${divY - 100}px`;
+
+    divX = e.clientX;
+    divY = e.clientY;
   }
-  else if ( x % 2 != 0 & y % 2 != 0 ) {
-    document.body.style.background = "blue";
-  }
-  else {
-    document.body.style.background = "green";
-  }
+})
+
+div.addEventListener("mouseup", () => {
+  div.style.backgroundColor = "black";
+  drawactive = !drawactive;
 })
