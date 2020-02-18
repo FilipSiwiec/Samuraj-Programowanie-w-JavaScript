@@ -16,28 +16,40 @@ const changeColor = (e) => {
   // wersja 1 - instrukcja if
   // wersja 2 - instrukcja switch
 
-  let active = false;
-
-if ( e.keyCode == 38 & red < 255) {
+// if ( e.keyCode == 38 & red < 255) {
   
-  red++;
-  green++;
-  blue++;
+//   red++;
+//   green++;
+//   blue++;
 
-  console.log(red, green, blue);
+//   console.log(red, green, blue);
 
-  document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
-}
+//   document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+// }
 
-else if ( e.keyCode == 40 & red > 0 ) {
-  red--;
-  green--;
-  blue--;
+// else if ( e.keyCode == 40 & red > 0 ) {
+//   red--;
+//   green--;
+//   blue--;
 
-  console.log(red, green, blue);
+//   console.log(red, green, blue);
 
-  document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
-}
+//   document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+// }
+
+switch (e.keyCode){
+  case 38:
+    document.body.style.backgroundColor = `rgb(${red < 255 ? red++ : red}, ${green < 255 ? green++ : green}, ${blue < 255 ? blue++ : blue})`;
+    console.log(red, green, blue);
+    break;
+
+
+  case 40:
+    document.body.style.backgroundColor = `rgb(${red > 0 ? red-- : red}, ${green > 0 ? green-- : green}, ${blue > 0 ? blue-- : blue})`;
+    console.log(red, green, blue);
+    break;
+  }
+
 
 }
 
