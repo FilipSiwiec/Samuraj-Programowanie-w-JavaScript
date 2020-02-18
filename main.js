@@ -16,6 +16,29 @@ const changeColor = (e) => {
   // wersja 1 - instrukcja if
   // wersja 2 - instrukcja switch
 
+  let active = false;
+
+if ( e.keyCode == 38 & red < 255) {
+  
+  red++;
+  green++;
+  blue++;
+
+  console.log(red, green, blue);
+
+  document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+}
+
+else if ( e.keyCode == 40 & red > 0 ) {
+  red--;
+  green--;
+  blue--;
+
+  console.log(red, green, blue);
+
+  document.body.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
+}
+
 }
 
 window.addEventListener('keydown', changeColor)
