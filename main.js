@@ -1,44 +1,14 @@
-const input = document.getElementById("pass");
-const div = document.querySelector(".message");
+// Projekt 5 - Zadanie dla Ciebie 
+// Sprawdź czy wpisane w input hasło pasuje do któegoś z hasel w tablicy. Jeśli tak wyświetl wiadomość w <div>
+//wielkość liter nie ma znaczenia (wykorzystaj metodę .toUpperCase lub .toLowerCase - pamiętaj, że metody te działają na pojedyńczym elemencie typu string)
 
-const passwords = ["user", "wiosna", "Ania"];
-const messages = ["wyjechalam na zawsze", "Piekna pora roku", "Jakis txt"];
+const input = document.querySelector("input");
+const passwords = ['jedEN', 'DwA'];
+const messages = ["super", "działa!"]
 
-input.addEventListener("input", (e) => {
-  div.textContent = "";
-  const text = e.target.value;
-  // console.log(text);
+const showMessage = (e) => {
+ //tutaj rozwiązanie
+ // PS. nie skupiaj się na niczym innym w zadaniu niż porównanie i wyświetlenie ( nie rób czyszczenia inputa itp. nie są potrzebne, chyba że masz ochotę)
+}
 
-  passwords.forEach( (password, index) => {
-      if( password === text ){
-        div.textContent = messages[index];
-        e.target.value = "";
-      }
-  })
-
-
-
-
-
-
-})
-
-input.addEventListener("focus", (e)=>{
-  e.target.classList.add("active");
-})
-
-input.addEventListener("blur", (e)=>{
-  e.target.classList.remove("active");
-})
-
-
-
-// console.log(e.target.value);
-  // if ( passwords === e.target.value) {
-  //   div.textContent = message;
-  //   e.target.value = "";
-  // }
-
-  // else {
-  //   div.textContent = "";
-  // }
+input.addEventListener("input", showMessage)
