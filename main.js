@@ -1,22 +1,24 @@
-const chars = 'ABCDEFGIJK0123456789';
+const names = [];
+const div = document.querySelector("div");
 
-const btn = document.querySelector('button');
-const section = document.querySelector('section');
+const addName = (e) => {
+        e.preventDefault();
+        const input = document.querySelector("input");
+        const newName = input.value;
 
-const codesNumber = 1000;
-const charsNumber = 12;
-
-const codesGeneretor = () => {
- for (let i = 0; i < codesNumber; i++) {
-  let code = "";
-  for (let i = 0; i < charsNumber; i++) {
-   const index = Math.floor(Math.random() * 20)
-   code += chars[index];
-  }
-  const div = document.createElement('div');
-  div.textContent = code;
-  section.appendChild(div)
- }
+    if ( newName.length > 0 ) {
+        for ( name of names ) {
+            if ( name === newName ) {
+                return;
+            }
+        }
+        names.push(newName);
+        console.log(names);
+        div.textContent += newName +", "; 
+        input.value = "";
+    }
+    
 }
 
-btn.addEventListener('click', codesGeneretor)
+document.querySelector("button").addEventListener("click", addName);
+
