@@ -1,96 +1,61 @@
-// Zobacz gotowy projekt: https://websamuraj.pl/examples/js/projekt7/
+const gamesChoices = {
+    handChoice: "",
+    aiChoice: "",
+}
 
-const gameSummary = {
-    numbers: 0,
-    wins: 0,
+const stats = {
+    gameNumbers: 0,
+    winings: 0,
     losses: 0,
-    draws: 0,
-   }
-   
-   const game = {
-    playerHand: "",
-    aiHand: "",
-   }
-   
-   const hands = [...document.querySelectorAll('.select img')];
-   
-   // Pierwsza funkcja
-   function handSelection() {
-   
-    game.playerHand = this.dataset.option
-    console.log(game.playerHand);
-    hands.forEach(hand => hand.style.boxShadow = '');
-    this.style.boxShadow = '0 0 0 4px red';
-   }
-   
-   // const handSelection = (e) => {
-   //  // this - nie tworzy
-   //  console.log(e.target);
-   //  console.log(e.currentTarget);
-   // }
-   
-   // Funkcja określająca wybór komputera
-   function aiChoice() {
-    return hands[Math.floor(Math.random() * 3)].dataset.option;
-   }
-   
-   // Funkcja zwracajająca informacje o wyniku gry
-   function checkResult(player, ai) {
-    // console.log(player, ai);
-    if (player === ai) {
-     return 'draw';
-    } else if ((player === "papier" && ai === "kamień") || (player === "kamień" && ai === "nożyczki") || (player === "nożyczki" && ai === "papier")) {
-     return 'win';
-    } else { return 'loss'; }
-   }
-   
-   // Publikacja wyniku
-   
-   function publishResult(player, ai, result) {
-    document.querySelector('[data-summary="your-choice"]').textContent = player;
-   
-    document.querySelector('[data-summary="ai-choice"]').textContent = ai;
-   
-    document.querySelector('p.numbers span').textContent = ++gameSummary.numbers;
-   
-    if (result === "win") {
-     document.querySelector('p.wins span').textContent = ++gameSummary.wins;
-     document.querySelector('[data-summary="who-win"]').textContent = "Ty wygrałeś!!!!"
-     document.querySelector('[data-summary="who-win"]').style.color = "green";
-    } else if (result === "loss") {
-     document.querySelector('p.losses span').textContent = ++gameSummary.losses;
-     document.querySelector('[data-summary="who-win"]').textContent = "Komputer wygrał :("
-     document.querySelector('[data-summary="who-win"]').style.color = "red";
-    } else {
-     document.querySelector('p.draws span').textContent = ++gameSummary.draws;
-     document.querySelector('[data-summary="who-win"]').textContent = "Remis :\\"
-     document.querySelector('[data-summary="who-win"]').style.color = "gray";
-    }
-   }
+    draws: 0, 
+}
 
-   function endGame(){
-    console.log("dziala")
-    document.querySelector(`[data-option=${game.playerHand}]`).style.boxShadow = "";
-    game.playerHand = "";
-    game.aiHand = "";
-   }
-   
-   //funkcja sterująca
-   function startGame() {
-    if (!game.playerHand) {
-     return alert("wybierz dłoń!!!!");
+let czlowiek = gamesChoices.handChoice;
+let komputer = gamesChoices.aiChoice;
+
+const hands = [...document.querySelectorAll(".select img")];
+
+hands.forEach( hand => hand.addEventListener("click", 
+function(){
+    hands.forEach(hand => hand.style.boxShadow = "");
+    this.style.boxShadow = '0 0 0 4px red';
+    czlowiek = this.dataset.option;
+}));
+
+function guzik (){
+    if (!czlowiek) return alert("Wybierz opcję!!!");
+    else if( czlowiek ){
+        document.querySelector('[data-summary="your-choice"]').textContent = czlowiek;
+        komputer = hands[Math.floor(Math.random()*3)].dataset.option;
+        document.querySelector('[data-summary="ai-choice"]').textContent = komputer;
+
+        if(czlowiek === komputer){
+            document.querySelector('[data-summary="who-win"]').textContent = "remis!";
+            document.querySelector('[data-summary="who-win"]').style.color = "grey";
+
+            document.querySelector(".draws span").textContent = ++stats.draws;
+        }
+        else if((czlowiek === "papier" && komputer === "kamień") || (czlowiek === "kamień" && komputer === "nożyczki") || (czlowiek === "nożyczki" && komputer === "papier")){
+            document.querySelector('[data-summary="who-win"]').textContent = "wygrana!";
+            document.querySelector('[data-summary="who-win"]').style.color = "red";
+
+            document.querySelector(".wins span").textContent = ++stats.winings;
+        }
+        else{
+            document.querySelector('[data-summary="who-win"]').textContent = "przegrana...";
+            document.querySelector('[data-summary="who-win"]').style.color = "green";
+
+            document.querySelector(".losses span").textContent = ++stats.losses;
+        }
+
+        document.querySelector(".numbers span").textContent = ++stats.gameNumbers;
+        
     }
-    game.aiHand = aiChoice();
-    const gameResult = checkResult(game.playerHand, game.aiHand);
-    console.log(gameResult);
-    publishResult(game.playerHand, game.aiHand, gameResult)
-    endGame();
-   }
-   
-   hands.forEach(hand => hand.addEventListener('click', handSelection))
-   
-   document.querySelector('.start').addEventListener('click', startGame)
-   
-   
-   
-   
+
+    hands.forEach(hand => hand.style.boxShadow = "");
+    czlowiek = "";
+
+}
+
+document.querySelector(".start").addEventListener("click", guzik)
+
