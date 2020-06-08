@@ -1,20 +1,47 @@
-const text = document.querySelector(".text");
-const pionowa = document.querySelector(".kursor");
-const Lorem = "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta, est? Recusandae, nobis? Reprehenderit facilis saepe eius a minus assumenda, officiis recusandae culpa ipsum sint perferendis numquam doloribus repudiandae veniam. Temporibus? KONIEC";
+// http://websamuraj.pl/examples/js/projekt8/
+// Uzyskaj efekt jak pod tym linkiem 
+// Użyj setTimeout zamiast setInterval,
+// Opóźniej start pisanie każdego słowa
+// Uwaga: Zadanie bardzo trudne
 
-const time = 40;
-let number = 0;
+const spnText = document.querySelector('.text');
+const spnCursor = document.querySelector('.cursor');
+const txt = ['tekst1', 'tekst2', 'tekst3']
 
-const funckcjaNasza = () =>{
-    text.textContent += Lorem[number]
-    number++;
-    if (number === Lorem.length) clearInterval(waly);
+let activeLetter = -15;
+let activeText = 0;
+
+
+// Implementacja
+const addLetter = () => {
+ // Użyj w środku setTimeout
+ if (activeLetter >= 0) {
+  spnText.textContent += txt[activeText][activeLetter];
+ }
+ activeLetter++;
+ if (activeLetter === txt[activeText].length) {
+
+  activeText++;
+  if (activeText === txt.length) return;
+
+  return setTimeout(() => {
+   activeLetter = -15;
+   spnText.textContent = '';
+   addLetter();
+  }, 2000)
+
+
+ }
+ setTimeout(addLetter, 100)
+
 }
 
-const waly = setInterval(funckcjaNasza, time);
 
-const klawisz = () =>{
-    pionowa.classList.toggle("active");
+addLetter(); //pierwsze wywołanie
+
+
+// Animacja kursora (zostaw bez zmian)
+const cursorAnimation = () => {
+ spnCursor.classList.toggle('active');
 }
-
-setInterval(klawisz, 400)
+setInterval(cursorAnimation, 400);
