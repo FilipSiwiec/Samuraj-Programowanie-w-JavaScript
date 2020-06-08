@@ -17,12 +17,22 @@
    font-size: 20px;
    letter-spacing: 1px;
   }
+
+.kursor{
+    opacity: 0;
+    transition: .2s;
+}
+
+.active{
+    opacity: 1;
+}
+
  </style>
 </head>
 
 <body>
  <div>
-  <span class="text"></span>
+  <span class="text"></span><span class="kursor">|</span>
  </div>
 
  <script src="main.js">
