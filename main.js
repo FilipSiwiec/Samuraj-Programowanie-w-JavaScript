@@ -1,27 +1,31 @@
 const slider = [{
     img: "images/img1.jpg",
-    text: "pierwszy tekst",
+    text: "Pierwszy text" 
 },
 {
     img: "images/img2.jpg",
-    text: "drugi tekst",
+    text: "Drugi text"  
 },
 {
     img: "images/img3.jpg",
-    text: "trzeci tekst", 
+    text: "Trzeci text" 
 }]
 
-let time = 3000;
-let active = 0;
-
-const img = document.querySelector("img.slider");
+const image = document.querySelector("img.slider");
 const h1 = document.querySelector("h1.slider");
 
-const funkcja = () => {
-    active++;
-    if (active === slider.length) {active = 0};
-    img.src = slider[active].img;
-    h1.textContent = slider[active].text;
+
+let time = 1000;
+let number = 0;
+
+const funkcja = () =>{
+    number++;
+    if(number === slider.length){
+        number = 0;
+    }
+    image.src = slider[number].img;
+    h1.textContent = slider[number].text;
+
 }
 
-setInterval(funkcja, time)
+setInterval(funkcja, time);
