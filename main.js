@@ -1,31 +1,41 @@
-const slider = [{
+const slideList = [{
     img: "images/img1.jpg",
-    text: "Pierwszy text" 
-},
-{
+    text: 'Pierwszy tekst'
+   },
+   {
     img: "images/img2.jpg",
-    text: "Drugi text"  
-},
-{
+    text: 'Drugi tekst'
+   },
+   {
     img: "images/img3.jpg",
-    text: "Trzeci text" 
-}]
+    text: 'Trzeci tekst'
+   }];
+   
+   const image = document.querySelector('img.slider');
+   const h1 = document.querySelector('h1.slider');
+   const dots = [...document.querySelectorAll(".dots span")];
 
-const image = document.querySelector("img.slider");
-const h1 = document.querySelector("h1.slider");
+   // Interfejs
+   const time = 3000;
+   let active = 0;
 
-
-let time = 1000;
-let number = 0;
-
-const funkcja = () =>{
-    number++;
-    if(number === slider.length){
-        number = 0;
+   const changeDot = () => {
+    const dotIndex = dots.findIndex( dot => dot.classList.contains("active"));
+    dots[dotIndex].classList.remove("active");
+    dots[active].classList.add("active");
+   }
+   
+   const changeSlide = () => {
+    active++;
+    if (active === slideList.length) {
+     active = 0;
     }
-    image.src = slider[number].img;
-    h1.textContent = slider[number].text;
+    image.src = slideList[active].img;
+    h1.textContent = slideList[active].text;
+   
 
-}
-
-setInterval(funkcja, time);
+    changeDot();
+   }
+   setInterval(changeSlide, time)
+   
+   // Implementacje
