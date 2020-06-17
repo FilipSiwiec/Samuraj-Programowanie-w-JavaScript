@@ -1,19 +1,15 @@
-const user = (name = "", age) => {
-    let userName = name;
-    let userAge = age;
-   
-    function showName() {
-     console.log(`Cześć ${userName}, ${userAge >= 18 ? 'Możesz kupić piwo' : 'Nie mozesz kupić piwa'}`);
+
+
+const funkcja = () => {
+    let number = 0;
+    const funkcja2 = () => {
+        console.log(number);
+        document.body.textContent = `${number} sekund`;
+        number++;
+        setTimeout(funkcja2, 1000);
     }
-   
-    return showName
-   }
-   
-   const mieszko = user("Mieszko", 20);
-   const jagienka = user("Jagienka", 17);
-   mieszko()
-   jagienka()
-   
-   const noName = user();
-   noName()
-   
+
+     funkcja2()
+}
+
+funkcja ();
