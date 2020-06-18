@@ -1,27 +1,38 @@
-const endTime = new Date('2019-01-05 18:34:00').getTime();
+const main = document.querySelector(".main");
+const reset = document.querySelector(".reset");
+const div = document.querySelector(".time div");
 
-const spanD = document.querySelector('span.d');
-const spanH = document.querySelector('span.h');
-const spanM = document.querySelector('span.m');
-const spanS = document.querySelector('span.s');
+let active = false;
+let number = 0;
+let Int;
 
-setInterval(() => {
- const nowTime = new Date().getTime();
- // const time = Math.floor((endTime - nowTime) / 1000);
- const time = endTime - nowTime;
- const days = Math.floor((endTime / (1000 * 60 * 60 * 24)) - (nowTime / (1000 * 60 * 60 * 24)));
- console.log(days);
+const start = () => {
 
- let hours = Math.floor((endTime / (1000 * 60 * 60) - nowTime / (1000 * 60 * 60)) % 24);
- // Przykład - dodanie 0 przeg godziną 
- hours = hours < 10 ? `0${hours}` : hours;
+    if (!active) {
+        active = !active;
+        main.textContent = "Pauza";
+        Int = setInterval(odliczanie, 10);
 
- const minutes = Math.floor((endTime / (1000 * 60) - nowTime / (1000 * 60)) % 60);
 
- const secs = Math.floor((endTime / 1000 - nowTime / 1000) % 60);
+    }
+    else {
+        active = !active;
+        main.textContent = "Start";
+        clearInterval(Int);
+    }
+}
 
- spanD.textContent = days;
- spanH.textContent = hours;
- spanM.textContent = minutes;
- spanS.textContent = secs;
-}, 1000)
+const resetowanie = () => {
+    console.log("reset");
+    number = 0;
+    div.textContent ="---";
+}
+
+odliczanie = () => {
+    number++;
+    div.textContent = (number / 100).toFixed(2);
+    
+};
+
+main.addEventListener("click", start);
+reset.addEventListener("click", resetowanie);

@@ -1,44 +1,45 @@
+<!-- zadanie 12 ver2 - stoper -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Projekt 11 - zadanie 2 - odliczanie do startu</title>
-	<style>
-		body {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			background-color: black;
-			font-family: arial;
-			color: white;
-			align-items: center;
-			height: 100vh;
-		}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Projekt 11 - zadanie 3 - stoper</title>
+    <style>
+        body {
+            margin: 0;
+        }
 
-		h1 {
-			font-size: 40px;
-		}
+        .time {
+            position: absolute;
+            width: 100vw;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            font-size: 60px;
+            text-align: center;
+            font-family: monospace;
+        }
 
-		p {
-			font-family: monospace;
-			font-size: 22px;
-		}
-	</style>
+        button {
+            font-size: 44px;
+            margin: 30px;
+        }
+    </style>
 </head>
 
 <body>
+    <button class="main">Start</button>
+    <button class="reset">Reset</button>
+    <div class="time">
+        <p>Czas od startu:</p>
+        <div>---</div>
+    </div>
+    <script src="main.js">
 
-	<p>Statek doleci do Jowisza za:</p>
-	<h1>
-		<span class="d">.</span> d:
-		<span class="h">.</span> h:
-		<span class="m">.</span> m:
-		<span class="s">.</span>s
-	</h1>
-
+    </script>
 </body>
-<script src='main.js'>
-</script>
 
 </html>
