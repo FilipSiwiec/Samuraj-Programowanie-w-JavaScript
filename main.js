@@ -1,12 +1,17 @@
-const funkcja = (e) => {
-    // e.target.parentNode.remove();
+// FILTER (I PRZYPOMNIENIE MAP)
 
-    // e.target.parentNode.style.textDecoration = "line-through";
-    // e.target.remove();
+// Filter
+const arr = [34, 219, 109, 2934, 12, 10, 29];
 
-    const index = e.target.dataset.key;
-    console.log(index);
-    document.querySelector(`li[data-key="${index}"]`).remove();
-}
+const oddNumbers = arr.filter(number => number % 2);
+const evenNumbers = arr.filter(number => !(number % 2));
+const numbersBiggerThen100 = arr.filter(number => number > 100);
 
-document.querySelectorAll("button[data-key]").forEach( item => item.addEventListener("click", funkcja));
+// Map
+const double = arr.map(number => number * 2);
+const people = arr.map(number => number + " osób");
+
+//forEach
+
+arr.forEach((number, index) => arr[index] = number * 2)
+
