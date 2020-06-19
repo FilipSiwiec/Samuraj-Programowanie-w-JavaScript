@@ -1,17 +1,18 @@
-// FILTER (I PRZYPOMNIENIE MAP)
+const input = document.querySelector("input");
+const ul = document.querySelector("ul");
+const liElements = document.querySelectorAll("li");
 
-// Filter
-const arr = [34, 219, 109, 2934, 12, 10, 29];
+const funkcja = (e) => {
+    let tasks = [...liElements];
+    
+    let searchText = e.target.value.toLowerCase();
+    tasks = tasks.filter(li => li.textContent.toLowerCase().includes(searchText));
+    console.log(tasks);
+    ul.textContent= "";
+    tasks.forEach(li => ul.appendChild(li));
+}
 
-const oddNumbers = arr.filter(number => number % 2);
-const evenNumbers = arr.filter(number => !(number % 2));
-const numbersBiggerThen100 = arr.filter(number => number > 100);
+input.addEventListener("input", funkcja);
 
-// Map
-const double = arr.map(number => number * 2);
-const people = arr.map(number => number + " osób");
 
-//forEach
-
-arr.forEach((number, index) => arr[index] = number * 2)
 
