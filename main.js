@@ -1,29 +1,46 @@
+const tablica = [];
+
 const form = document.querySelector("form");
-const number = document.querySelector("h1 span");
-const ul = document.querySelector("ul");
 const input = document.querySelector("input");
-const list = document.getElementsByClassName("task");
+const ul = document.querySelector("ul");
+const number = document.querySelector("h1 span");
+const dodane = document.getElementsByClassName("task");
 
 const remove = (e) => {
     e.target.parentNode.remove();
-    number.textContent = list.length;
+    number.textContent = dodane.length;
+    console.log(tablica);
+    const index = e.target.parentNode.dataset.key;
+    tablica.splice(index, 1);
+    renderList();
 }
 
 const funkcja = (e) => {
     e.preventDefault();
     const inside = input.value;
-    if (inside === "")return;
-    
+    if (inside === "") return;
+
     const task = document.createElement("li");
     task.className = "task";
     task.innerHTML = inside + "<button>usun</button>";
     ul.appendChild(task);
 
-    number.textContent = list.length;
+    tablica.push(task);
+    console.log(tablica);
+
+    number.textContent = dodane.length;
 
     input.value = "";
+    task.querySelector("button").addEventListener("click", remove)
+    renderList();
+}
 
-    task.querySelector("button").addEventListener("click", remove);
+const renderList = () => {
+    ul.textContent = "";
+    tablica.forEach((elem, key) => {
+        elem.dataset.key = key;
+        ul.appendChild(elem);
+    })
 }
 
 form.addEventListener("submit", funkcja);
