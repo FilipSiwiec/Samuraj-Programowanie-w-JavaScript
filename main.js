@@ -1,18 +1,29 @@
-const input = document.querySelector("input");
+const form = document.querySelector("form");
+const number = document.querySelector("h1 span");
 const ul = document.querySelector("ul");
-const liElements = document.querySelectorAll("li");
+const input = document.querySelector("input");
+const list = document.getElementsByClassName("task");
 
-const funkcja = (e) => {
-    let tasks = [...liElements];
-    
-    let searchText = e.target.value.toLowerCase();
-    tasks = tasks.filter(li => li.textContent.toLowerCase().includes(searchText));
-    console.log(tasks);
-    ul.textContent= "";
-    tasks.forEach(li => ul.appendChild(li));
+const remove = (e) => {
+    e.target.parentNode.remove();
+    number.textContent = list.length;
 }
 
-input.addEventListener("input", funkcja);
+const funkcja = (e) => {
+    e.preventDefault();
+    const inside = input.value;
+    if (inside === "")return;
+    
+    const task = document.createElement("li");
+    task.className = "task";
+    task.innerHTML = inside + "<button>usun</button>";
+    ul.appendChild(task);
 
+    number.textContent = list.length;
 
+    input.value = "";
 
+    task.querySelector("button").addEventListener("click", remove);
+}
+
+form.addEventListener("submit", funkcja);
