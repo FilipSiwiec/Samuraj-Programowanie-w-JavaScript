@@ -1,46 +1,23 @@
-const tablica = [];
+/* KONSTRUKTOR I INSTANCJA */
 
-const form = document.querySelector("form");
-const input = document.querySelector("input");
-const ul = document.querySelector("ul");
-const number = document.querySelector("h1 span");
-const dodane = document.getElementsByClassName("task");
+// Konstruktor to funkcja. Konwencja nakazuje by nazwa konstruktura pisana była wielką literą.
+// konstruktor tworzymy za pomocą wyrażenie (przypisanie do zmiennej) lub deklracja. oba przykłądy ponizej.
 
-const remove = (e) => {
-    e.target.parentNode.remove();
-    number.textContent = dodane.length;
-    console.log(tablica);
-    const index = e.target.parentNode.dataset.key;
-    tablica.splice(index, 1);
-    renderList();
-}
+// const Car = function() { }
 
-const funkcja = (e) => {
-    e.preventDefault();
-    const inside = input.value;
-    if (inside === "") return;
-
-    const task = document.createElement("li");
-    task.className = "task";
-    task.innerHTML = inside + "<button>usun</button>";
-    ul.appendChild(task);
-
-    tablica.push(task);
-    console.log(tablica);
-
-    number.textContent = dodane.length;
-
-    input.value = "";
-    task.querySelector("button").addEventListener("click", remove)
-    renderList();
-}
-
-const renderList = () => {
-    ul.textContent = "";
-    tablica.forEach((elem, key) => {
-        elem.dataset.key = key;
-        ul.appendChild(elem);
-    })
-}
-
-form.addEventListener("submit", funkcja);
+function Car(name) {
+    // console.log(this);
+    this.name = name;
+   }
+   
+   // Instanacja (egzemplarz) - obiekt stworzony w oparciu o wzór w konstruktorze. Posiada także odwołanie do prototypu constructora.
+   
+   const maluch = new Car('maluch');
+   const polonez = new Car('polonez');
+   // JAK DZIAŁA TWORZENIE NOWEGO EGZEMPLARZA (INSTANCJI)
+   // 1. new + funkcja konstruktora - powstaje nowy  obiekt na którym wywoływana jest funkcja konstruktora.
+   // 2. następuje wiązanie this z utworzonym obiektem
+   // 3. W nowym obiekcie powstaje własciwość __proto__ wskazująca na prototyp konstruktora
+   // 4. Przypisanie nowego obiektu do zmiennej
+   
+   maluch.name = "zabytek"
