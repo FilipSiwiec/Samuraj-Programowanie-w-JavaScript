@@ -1,123 +1,93 @@
-/* PROTOTYP */
+/* ----- Czym jest klasa W JS ----- */
+// Klasa jest tym czymś czego potrzebował JS :). Naprawdę ułatwia życie programisty. Dostępna od ES6
+// Klasa jest schematem (wzorem) na podstawie którego tworzymy nowe obiekty, instancje, egzemplarze klasy. 
+// Klasa pozwala stosować w obiekcie dziedziczenie, hermetyzacje, polimorfizm 
+// Klasa jest lukrem składniowym, pozwala napisać łatwiej, ładniej, szybciej, ale ciągle to jest to samo co już mogliśmy zrobić przed ES6, zanim pojawiły się klasy (np. za pomocą konstruktora funkcji).
 
-/* CZĘŚĆ 1 */
-const Person = function(name, age) {
-    this.name = name;
-    this.age = age;
-    this.children = [];
-    // this.addChildren = function(name) {
-    //  this.children.push(name);
-    // }
-   }
-   
-   // obiekt prototype znajduje się w konstruktorze i możemy do niego przypisywać metody do których dostęp mają wszystkie instancje (egzemplarze) stworzoene w oparciu o konstruktor
-   
-   Person.prototype.addChildren = function(name) {
-    this.children.push(name);
-   }
-   
-   // Do prototypu zdecydowanie częsciej przypisujemy funkcje (a więc metody) niż inne typy.
-   Person.prototype.gender = 'female';
-   
-   const arek = new Person('arek', 20);
-   const monika = new Person('monika', 30);
-   
-   monika.addChildren('basia')
-   
-   /* CZĘŚĆ 2 */
-   
-   // CZYM JEST PROTOTYP
-   
-   // Prototyp to obiekt w funkcji konstruktora, współdzielony przez wszystkie egzemplarze. Kązdy egzemplarz ma dostęp do obiektu prototypu.
-   
-   // CO ZAWIERA PROTOTYP?
-   // domyślnie właściwość constructor (funkcja konstruktora lub klasa) + to co zostanie przypisane do prototypu
-   
-   function Player() {
-   }
-   
-   class User {
-   
-   }
-   
-   
-   Player.prototype.age = 25;
-   const janek = new Player();
-   const marta = new User();
-   
-   janek.constructor
-   marta.constructor
-   
-   const darek = new janek.constructor()
-   
-   
-   // DODANIE ELEMENTÓW DO PROTOTYPU (KONSTRUKTOR)
-   function Citizen(country, citizenship) {
-    this.country = country;
-    this.citizenship = citizenship;
-    this.changeCitizenship = function(citizenship) {
-     this.citizenship = citizenship;
-     console.log(`Zmiana za pomocą metody w instancji na obywatelstwo ${this.citizenship}`)
+/* ----- Jak tworzymy klasę ----- */
+// słowo kluczowe class
+// w środku klasy metody (żadna metoda nie jest obowiązkowa)
+// to co umeiszczamyu w konstruktorze jest potem umeiszczane (jako kopia) w każdym egzemplarzy klasy.
+//  wszystkie metody, które umieszczamy bezpśrednio w klasie (ponizej przykład addMember) są umeiszczane w prototypie klasy
+
+class Family {
+    constructor(name) {
+     this.name = name;
+     // this.addMember = function() {
+     //  console.log("wywołane z instancji");
+     // } //metoda byłaby umeiszczaona jako kopia w kazdej instancji klasy
     }
+    // ta metoda umieszczana jest w prototypie klasy, który współdzielą wszystkie instancje (obiekty powstałą w oparciu o klasę)
+    addMember() {
+     console.log("wywołane z prototypu");
+    }
+   
    }
    
-   Citizen.prototype.changeCitizenship = function(citizenship) {
-    this.citizenship = citizenship;
-    console.log(`Zmiana za pomocą metody w protypie na obywatelstwo ${this.citizenship}`)
+   // Tworzenie instancji na podstawie klasy odbywa się w taki sam sposób jak na podstawie funckji konstruktora 
+   const nowakowie = new Family("nowakowie")
+   
+   // Wywołanie metoda. Najpeirwsz szuka w instancji, potem w łacuhc prototypów (zaczyna od prototypu klasy)
+   nowakowie.addMember()
+   
+   // KLASA JEST ODPOWIEDNIKIEM KONSTRUKTORA, PONIŻEJ TO WIDAĆ DOSKONALE. UZYSKUJEMY TEN SAM EFEKT CO PRZY KLASIE
+   const Family2 = function(name) {
+    this.name = name;
+   }
+   const kowalscy = new Family2("kowalscy");
+   Family2.prototype.addMember = function() { }
+   
+   
+   
+   /* ----- Wyrażenie klasy ----- */
+   
+   // Wyrażenie funkcyjne 
+   const Person = function() { }
+   // Deklaracja klasy
+   function Person2() {
+   }
+   // Deklaracja klasy
+   class Person3 {
+   }
+   // Wyrażenie klasy
+   const Person4 = class {
    }
    
-   const zenek = new Citizen("Polska", "polskie");
-   const marysia = new Citizen("Francja", "niemieckie");
+   // PRZYKŁAD KLASY
    
-   // zenek.changeCitizenship('rosyjskie')
+   class Rodzina {
+    constructor(members, ...names) {
+     this.members = members;
+     this.names = names;
+    }
+    addMember(newMember) {
+     this.names.push(newMember);
+     this.members++;
+     console.log(`Nowy członek rodziny: ${newMember}. Rodzina liczy teraz ${this.members} osób`);
+    }
    
-   // Obiekt prototype zawsze aktualny
-   // console.log(zenek.age);
-   Citizen.prototype.age = 21;
-   // console.log(zenek.age);
+    //Metody statyczne deklarowane w klasie - Dodajemy prefiks static. Metody statyczne można wywołać z poziomu klasy (nie są dostępne z poziomu instancji)
+    static makeFamily(...memebers) {
+     return memebers;
+    }
    
-   // Przysłanianie
-   
-   // Rozszerzanie prototypu także wbudowanych konstruktorów
-   const arr = [5, 6, 7, 8];
-   Array.prototype.delete = function(index) {
-    return this.splice(index, 1)
    }
    
+   const stasiakowie = new Rodzina(3, 'Jan', 'Ewa', 'Adam')
    
-   // CZĘŚĆ 3
+   stasiakowie.addMember("Jaś");
    
-   // ŁAŃCUCH PROTOTYPÓW (PROTOTYPE CHAIN)
+   const kwiatkowscy = new Rodzina(1, "Piotr");
    
-   arr.__proto__ //protyp konstruktora
-   arr.__proto__.__proto__ //protyp Object
-   arr.__proto__.__proto__.__proto__ //null
-   //arr.age = 20
-   // proto1.age = 20
-   Object.prototype.age = 20;
-   
-   zenek.__proto__.__proto__.__proto__
-   
-   // KILKA INNYCH ISTOTNYCH ELEMENTÓW
-   // Instanceof 
-   
-   arr instanceof Array;
-   arr instanceof Object;
-   arr instanceof Citizen;
-   
-   zenek instanceof Citizen;
-   zenek instanceof Object;
-   zenek instanceof Function;
+   // Wywołanie metody statycznej (na konstruktorze, na klasie)
+   Rodzina.makeFamily('Maria', 'Filip')
    
    
-   // Object.getPrototypeOf 
-   Object.getPrototypeOf(arr)
-   Object.getPrototypeOf(zenek)
+   /* ----- Warto pamietać o klasach na tym etapie ----- */
    
-   // constructor czy prototyp - co łączy instancję z funkcją konstruktora (także  klasą) 
-   
-   const janusz = new Citizen()
-   //janusz.__proto__ = Citizen.prototype
-   
-   
+   // -- nie podlegają hoistingowi
+   // -- mniejsze mozliwości popełnienia błędu choćby nie da się wywołać bez new
+   // -- czytelniejsze
+   // -- uproszczenie w napisaniu wielu innych rzeczy jako np. dziedziczenie (extends). 
+   // -- co da się napisać za pomocą klasy, mozna też napisać w ES6, ale jest to bardziej (lub zdecydowanie bardziej) zawiłe. Tu jest proste.
    
