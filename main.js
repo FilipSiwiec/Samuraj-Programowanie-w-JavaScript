@@ -1,109 +1,78 @@
-'use strict'
-// Problem utraty wiązania this przez funkcje wywołaną w innej funkcji. Przykłady rozwiązania
+// PRYWATNE I PUBLICZNE WŁAŚCIWOŚCI
+// Domyślnie wszystkie metody i właściwości obiektów są publiczne w JS
 
-const szarik1 = {
+// PRZYKŁADY UKRYWANIA DANYCH
+// _konwencja
+// wykorzystanie closure - metody dostępowe do ukrytych właściwości
 
- children: ['fafik', 'żaba'],
+// 1 - KONWENCJA
 
- showChildren: function() {
-  this.children.forEach(function(child, index) {
-   // na tym etapie wywowłanie tej funkcji anonimowej spowoduje, że nie będzie ona przejmowała this z funkcji wywołanej wszędzie lecz stworzy własne wiązanie domyślne z obiektem globalnym. W przypdku użycia 'use strict' będzie to wiązanie z undefined.
-   // console.log(this.children[index]); // odkomentowanie tej linijki powoduje błąd, bo window (czy undefined) nie ma własciwości children, która jest tablicą.
-   console.log(this); //window - wiązanie domyślne się pojawia
-  })
- },
-}
-
-szarik1.showChildren()
-
-/* ROZWIĄZANIE */
-
-// 1. that = this
-
-const szarik2 = {
- children: ['fafik', 'żaba'],
- showChildren: function() {
-  const that = this;
-  // Zawartość this (a więc obiekt) przypisujemy do innej zmiennej (często nazywamy ją that, self). Teraz możemy odwołać się do tej zmiennej (zawierajacej "prawidłowe" wiązanie) w funkcji wewnątrz.
-  this.children.forEach(function(child, index) {
-   console.log(that.children[index]);
-   //zwórc uwagę, że w consoli napisaliśmy that.
-  })
- },
-}
-
-szarik2.showChildren()
-
-
-
-// 2. Bez funkcji (więc bez dodatkowego wywołania funkcji) - za pomocą pętli for of
-
-const szarik3 = {
- children: ['fafik', 'żaba'],
- showChildren: function() {
-  // Po prostu iterujemy po tablicy. Nie ma wywołania, nie powstaje więc nowe wiązanie this (pracujemy w tym samym kontekście, pętla nie tworzy nowego). 
-  for (const child of this.children) {
-   console.log(child);
-  }
- },
-}
-
-szarik3.showChildren()
-
-
-// 3. arrow function - nie tworzy własnego wiązania this
-
-const szarik4 = {
- children: ['fafik', 'żaba'],
- showChildren: function() {
-  this.children.forEach((child, index) => {
-   console.log(this.children[index]);
-   // function(){} stworzy nowy this. ()=>{} nie tworzy nowego this, a dziedziczy je z aktualnego.
-  })
- },
-}
-
-szarik4.showChildren()
-
-
-// 4. bind - trwałe wiązanie funckcji ze wskazanym this
-
-const szarik5 = {
- children: ['fafik', 'żaba'],
- showChildren: function() {
-  this.children.forEach(function(child, index) {
-   console.log(this.children[index]);
-  }.bind(this))
-  // metoda bind wywołana na funkcji zwraca inną funkcją, która jest taka sama, ale zawiera już wiązanie, ze wskazanym obiektem (to może być różny obiekt) W przykłądzie robimy wiązanie z this, które na tym etapie jest jeszcze obiektem na którym wywołujemy funkcję (dopiero wewnatrz funkcji callback straciłoby to wiązanie) 
- },
-}
-
-szarik5.showChildren()
-
-
-// DODATKOWO PONAD FILM
-// 5 - wykorzystanie metody forEach do przekazania this
-// Metoda forEach oprócz callback, może przyjąć też this jako drugi argument (wtedy mimo utraty wiązania domyślnego mamy trwałe przypisanie this do callback, co też rozwiązuje nam problem).
-
-const szarik6 = {
- children: ['fafik', 'żaba'],
- showChildren: function() {
-  this.children.forEach(function(child, index) {
-   console.log(this.children[index]);
-  }, this) //w tym miejscu pojawił się drugi argument (pierwszym jest callback)
- },
-}
-
-szarik6.showChildren()
-
-// Działa też ta metoda z arrow function
-const szarik7 = {
- children: ['fafik', 'żaba'],
- showChildren: function() {
-  this.children.forEach((child, index) => {
-   console.log(this.children[index]);
-  }, this)
- },
-}
-
-szarik7.showChildren()
+class Cat {
+    constructor(color) {
+     this._color = color
+    }
+    //metoda pobierająca zawartość _color
+    getColor() {
+     return this._color;
+    }
+   
+    setColor(value) {
+     if (typeof value === "string") {
+      return this._color = value;
+     } else {
+      console.log('wartość nieprawidłowa');
+     }
+    }
+   }
+   
+   const kotek = new Cat('czarny')
+   
+   
+   // 2 - WYKORZYSTANIE DOMKNIĘĆ (CLOSURES)
+   
+   // PRZYKŁAD 1
+   
+   class Dog {
+    constructor(name, color) {
+     this.name = name;
+     let _color = color;
+     this.getColor = () => color;
+     this.setColor = color => _color = color;
+   
+    }
+   }
+   
+   const fafik = new Dog('fafik', "brązowy")
+   // PRZYKŁAD 2
+   
+   class Car {
+    constructor(name, counter = 100000, year = 2000) {
+     this.name = name;
+     let _counter = counter;
+     let _year = year;
+     let _changeNumber = 0;
+   
+     // this.getYear = function() {
+     //  return _year;
+     // }
+     this.getYear = () => _year;
+   
+     this.setCounter = function(value) {
+      _changeNumber++;
+      return _counter = value
+     }
+   
+     this.getCounter = function() {
+      if (_changeNumber) alert(`uważaj licznik zmieniony ${_changeNumber}`)
+      return _counter
+     }
+   
+     this.showCarAge = function(year) {
+      return year - _year;
+     }
+   
+    }
+   
+   }
+   
+   const polonez = new Car("polonez caro", 25000, 2009)
